@@ -1,8 +1,8 @@
 # Latex
 
-> Reporsitory for notes written in Latex 
+> Reporsitory for notes written in Latex  
 > Name: Xinhai Zou  
-> Github: SeanMWX 
+> Github: SeanMWX  
 > <font color="red">Please DO NOT COPY ANYTHING WITHOUT PERMISSIONS!</font>
 
 ## Installation 
