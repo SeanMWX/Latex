@@ -1,0 +1,141 @@
+\subsection{Some ML examples in practice}
+\begin{enumerate}
+    \item Autonomous cars
+    \item The Robosail project
+    \item The Robot Scientist
+    \item Infra Watch, "Hoolandse brug" - the bridge
+    \item Language learning
+    \item Automating manual tasks
+\end{enumerate}
+
+\subsection{Machine Learning}
+\textbf{Definition} of machine learning: it is the study of how to make programs improve their performance on certain tasks from own (experience).
+\\In this case:
+\begin{itemize}
+    \item "performance" = speed, accuracy
+    \item "experience" = earlier observations
+\end{itemize}
+\textbf{Machine Learning vs. other AI} \\
+In \textbf{machine learning}, the key is \textbf{data}, examples of questions and their answer; observations of earlier attempts to solve the problem
+\\ In \textbf{inductive inference}, it is reasonsing from \textbf{specific} to \textbf{general}, statistics: sample -> population; from \textbf{concrete observations} -> \textbf{general theory}
+
+\subsection{Machine Learning learning landscape}
+\begin{outline}
+    \1 tasks
+        \2 clustering
+        \2 classification
+        \2 regression
+        \2 reinforcement learning
+    \1 techniques
+        \2 Convex optimization
+        \2 Matrix factorization
+        \2 Transfer learning
+        \2 Learning theory
+        \2 Greedy search
+    \1 models
+        \2 automata
+        \2 neural network
+        \2 deep learning
+        \2 statistical relational learning
+        \2 decision trees
+        \2 support vector machines
+        \2 nearest neighbors
+        \2 rule learners
+        \2 bayesian learning
+        \2 probabilisitc graphical models
+    \1 applications
+        \2 natural language processing
+        \2 vision
+        \2 speech
+    \1 related courses
+        \2 neural computing
+        \2 support vector machine
+        \2 uncertainty in AI
+        \2 data mining
+        \2 genetic algorithms and evolutionary computing
+\end{outline}
+
+\subsection{Some basic concepts and terminology}
+\begin{outline}
+    \1 Predictive learning
+        \2 Definition: learn a model that can predict a particular property/ attribute/ variable from inputs
+        \2 Binary classification: distinguish instances of class C from other instances
+        \2 Classification: assign a class C (from a given set of classes) to an instances
+        \2 Regression: assign a numerical value to an instance
+        \2 multi-label classification: assign a set of labels (from a given set) to an instance
+        \2 multivariate regression: assign a vector of numbers to an instances
+        \2 multi-target prediction: assign a vector of values (numerical, categorical) to an instances
+    \1 Descriptive learning
+        \2 Definition: given a dataset, describe certain patterns in the dataset, or in the population it is drawn from
+    \1 Typical tasks in ML
+        \2 function learning: learn a function X->Y taht fits the given data
+        \2 distribution learning: distribution learning
+            \3 parametric: the function family of the distribution is known, we only need to estimate its parameters
+            \3 non-parametric: no specific function family assumed
+            \3 generative: generate new instances by random sampleing from it
+            \3 discriminative: conditional probability distribution
+    \1 Explainable AI (XAI)
+        \2 Definition: means that the decisions of an AI system can be explained
+        \2 Two different levels:
+            \3 We understand the (learned) model
+            \3 We understand the individual decision
+\end{outline}
+
+\subsection{Input formats (predictive learning)}
+\begin{outline}
+    \1 Set
+        \2 training set: a set of examples, instance descriptions that include the target property (a.k.a. labeled instances)
+        \2 prediction set: a set of instance descriptions that do not include the target property ('unlabeled' instances)
+        \2 prediction task: predict the label of the unlabeled instances
+    \1 Outcome of learning process
+        \2 transductive learning: the predictions themselves
+        \2 inductive learning: a function that can predict the label of any unlabeled instance
+    \1 Explainable AI
+        \2 interpretable: can be intepred
+        \2 black-box: non-interpretable
+    \1 Learning
+        \2 Supervised learning: from labeled
+        \2 Unsupervised learning: from unlabeled
+        \2 Semi-supervised learning: from a few labeled and many unlabeled
+    \1 Format of input data
+        \2 input is often assumed to be a set of instances that are all described using the same variables (features, attributes)
+        \2 i.i.d.: independent and identically distributed
+            \3 tabular data (NN)
+            \3 sequences
+            \3 trees
+            \3 graph
+            \3 raw data: learning meaningful feaures from raw data
+            \3 knowledge: inductive logic programming
+\end{outline}
+
+\subsection{Output formats, methods (predictive learning)}
+The \textbf{output} of a learning system is a model.
+\begin{outline}
+    \1 output
+        \2 parametrized functions
+        \2 ocnjunctive concepts: a conjuntive concept is expressed as a set of conditions, all of which must be true
+        \2 rule sets (if...then...else...)
+        \2 decision trees
+        \2 neural networks
+        \2 probabilisitc graphical models
+    \1 search methods
+        \2 discrete spaces - methods: hill-climbing, best-first
+        \2 continuous spaces - methods: gradient descent
+    \1 typically
+        \2 model structure not fixed in advanced - discrete
+        \2 fixed model structure, tune numerical parameters - continuous
+    \1 hypothesis space
+        \2 definition: all possible instances
+        \2 for robot example: \{B,R,M,?\} x \{S,T,?\} x \{L,W,?\} x \{1,2,?\}
+    \1 Verson space
+        \2 using candidate elimination
+        \2 pros
+            \3 can be used for discrete hypothesis spaces
+            \3 search for all solutions, rather than just one, in an efficient manner
+            \3 importance of generality ordering
+        \2 cons
+            \3 not robust to noise
+            \3 only conjunctive concepts
+\end{outline}
+
+
