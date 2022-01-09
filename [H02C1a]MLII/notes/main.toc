@@ -1,0 +1,17 @@
+\contentsline {section}{\numberline {1}Lecture 1: Introduction, Version spaces}{1}{}%
+\contentsline {subsection}{\numberline {1.1}Some ML examples in practice}{1}{}%
+\contentsline {subsection}{\numberline {1.2}Machine Learning}{1}{}%
+\contentsline {subsection}{\numberline {1.3}Machine Learning learning landscape}{1}{}%
+\contentsline {subsection}{\numberline {1.4}Some basic concepts and terminology}{2}{}%
+\contentsline {subsection}{\numberline {1.5}Input formats (predictive learning)}{3}{}%
+\contentsline {subsection}{\numberline {1.6}Output formats, methods (predictive learning)}{4}{}%
+\contentsline {section}{\numberline {2}Lecture 2: Induction of decision tree}{5}{}%
+\contentsline {subsection}{\numberline {2.1}Overview of DT}{5}{}%
+\contentsline {subsection}{\numberline {2.2}Learn trees from data}{6}{}%
+\contentsline {section}{\numberline {3}Lecture 3: Learning sets of rules}{7}{}%
+\contentsline {section}{\numberline {4}Lecture 4: Instance-based learning, Clustering}{7}{}%
+\contentsline {section}{\numberline {5}Lecture 5: Evaluating hypotheses}{7}{}%
+\contentsline {section}{\numberline {6}Lecture 6: Numerical approaches (ANN, SVM), Computational learning theory}{7}{}%
+\contentsline {section}{\numberline {7}Lecture 7: Probabilistic approaches, Ensembles}{7}{}%
+\contentsline {section}{\numberline {8}Lecture 8: Reinforcement learning}{7}{}%
+\contentsline {section}{\numberline {9}Lecture 9-10: Inductive logic programming}{7}{}%

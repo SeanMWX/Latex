@@ -1,0 +1,46 @@
+\subsection{Overview of DT}
+\begin{outline}
+    \1 A decision tree represents a decision procedure where
+        \2 you start with one question
+        \2 the answer will determine the next question
+        \2 and repeat, untill you reach a decision
+    \1 We will usually call the questions "tests" and the decision a "prediction"
+    \1 attribute
+        \2 input attribute X = \{X$_{1}$, X$_{2}$ ..., X$_{n}$\}
+        \2 target attribute Y
+        \2 the tree represents a function f: X -> Y
+    \1 Example: Playing Tennis Tree
+        \2 Outlook: X$_{1}$ = \{Sunny, Overcast, Rainy\}
+        \2 Humidity: X$_{2}$ = \{High, Normal\}
+        \2 Wind: X$_{3}$ = \{Strong, Weak\}
+        \2 Tennis: Y = \{Yes, No\}
+        \2 The tree represents a function Outlook x Humidity x Wind -> Tennis
+    \1 Boolean tree
+    \1 Continuous input attributes
+        \2 We cannot make a different child node for each possible value!
+        \2 Solution: use comparative test -> a finite number of possible outcomes
+    \1 Type of trees
+        \2 target attribute Y is nomial -> classification tree
+        \2 target attribute Y is numerical -> regression tree
+    \1 \textbf{Advantages of Tree (Why tree?)}
+        \2 Learning and using tree is \textbf{efficient}
+        \2 Tend to have \textbf{good predictive accuracy}
+        \2 Tree is \textbf{interpretable}
+\end{outline}
+
+\subsection{Learn trees from data}
+\begin{outline}
+    \1 Two tasks for DT
+        \2 Task 1: find the smallest tree T such that $\forall$(x,f(x))$\in$D: T(x)=f(x) (meaning that only fullfill current data set)
+        \2 Task 2: find the tree T such that for x drawn from population \emph{D}, T(x) is (on average) maximally similar to f(x) (T:model tree from data set D, f(x):true function in population \emph{D})
+            \3 loss function: l: Y$_{1}$ x Y$_{2}$ -> R (where Y$_{1}$ is predicted value, Y$_{2}$ is actual value)
+            \3 risk R of T, the expectation of loss function, is $E_{x{\sim}D}[l(T(x),f(x))]$, which is needed to be minimal.
+    \1 the basic principle
+        \2 The approach is known as "Top-down induction of decision trees (TDIDT)", or "recursive partitioning"
+            \3 1. start with the full data set D
+            \3 2. find a test such that examples in D with the same outcome for the test tend to have the same value of Y
+            \3 3. split D into subsets, one for each outcome of that test
+            \3 4. repeat this procedure on each subset that is not yet sufficiently "pure" (meaning, not all elements have the same Y)
+            \3 5. keep repeating until no further splits possible
+    
+\end{outline}

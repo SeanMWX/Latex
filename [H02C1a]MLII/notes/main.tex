@@ -1,0 +1,43 @@
+\documentclass{article}
+
+% include graph
+\usepackage{graphicx}
+% if then else
+\usepackage{ifthen}
+% for sub itermize
+\usepackage{outlines}
+
+%----------------------------- THE ARTICLE -------------------------------
+
+\begin{document}
+
+\input{../others/title_page}
+
+\pagenumbering{roman} 
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{Lecture 1: Introduction, Version spaces}
+\input{lec1}
+\section{Lecture 2: Induction of decision tree}
+\input{lec2}
+\section{Lecture 3: Learning sets of rules}
+\input{lec3}
+\section{Lecture 4: Instance-based learning, Clustering}
+\input{lec4}
+\section{Lecture 5: Evaluating hypotheses}
+
+\section{Lecture 6: Numerical approaches (ANN, SVM), Computational learning theory}
+
+\section{Lecture 7: Probabilistic approaches, Ensembles}
+
+\section{Lecture 8: Reinforcement learning}
+
+\section{Lecture 9-10: Inductive logic programming}
+
+\clearpage
+
+
+\end{document}
