@@ -42,5 +42,199 @@
             \3 3. split D into subsets, one for each outcome of that test
             \3 4. repeat this procedure on each subset that is not yet sufficiently "pure" (meaning, not all elements have the same Y)
             \3 5. keep repeating until no further splits possible
-    
+    \1 rule representation of tree
+        \2 trees can be written as if-then-else rules
+        \2 rules can be simplified
+    \1 Two main questions?
+        \2 How to choose which test should be the first? (guess: attribute with minimal entropy?)
+        \2 When to stop splitting nodes? (guess: till pure? or threshold for probability?)
 \end{outline}
+
+\subsection{Choosing the best test}
+\begin{outline}
+    \1 We focus on classification tree (Y is nominal)
+    \1 Information theory
+        \2 a good test is a test that carries much information about the class
+        \2 "entropy" or "missing information": how many bits needed, on average, to convey a piece of infomration, if an optimal encoding is used
+        \2 \textbf{bits} <- \textcolor{red}{Question!! Do not understand the bit, how is it related to entropy?}
+        \2 But whatever, the cleverest bit has been provided as below, which is called "entropy"
+            \3 $e=-\sum_{i=1}^{k} p_{i} \log_{2}{p_{i}}$
+        \2 The number e reflects the minimal number of bits that you will need, on average, to encode one value. It is the inherent information content, or \textbf{entropy}.
+    \1 for classification - we use class entropy
+        \2 The class entropy of a set S of objects(\textbf{x},y), where y can be any of k classes c$_{i}$, is defined as
+            \3 $CE(S) = - \sum_{i=1}^{k} p_{i} \log_{2}{p_{i}}$ with $p_{i} = \frac{(|(x,y) \in S|y=c_{i}|)}{|S|}$
+            \3 it measures how much uncertainty there is about the class of a particular instance
+        \2 high entropy = "many possbilities, all equally likely" - not good for splitting
+        \2 low entropy = "few possibilities, safer to conclude" - better for splitting nodes
+        \2 entropy measures uncertainty
+    \1 information gain (IG)
+        \2 will have the same effect of attribute entropy
+        \2 the information gain of a question = the expected reduction of entropy by obtaining the answer to the question
+        \2 in the case of classification trees: expected reduction of class entropy:
+            \3 $IG(S,t) = CE(S) - \mathbb{E} (CE(S_{i})) = CE(S) - \sum_{i=1}^{o} \frac{|S_{i}|}{|S|} CE(S_{i})$
+            \3 with \emph{t} a test, \emph{o} the number of possible outcomes of attribute/test \emph{t}, and \emph{S$_{i}$} the subset of \emph{S} for which the \emph{i}'th outcome was obtained.
+\end{outline}
+However, if we focus on regression tree (Y is numerical), can we still use class entropy or information gain?
+\begin{outline}
+    \1 Now we assume Y is numerical
+    \1 Now we use \textbf{variance reduction} instead of entropy or information gain
+        \2 the variacne of Y in a set S of instances (x,y) is
+        \2 $Var(S) = \frac{\sum_{(x,y) \in S} (y-\hat{y})^{2}}{|S|-1}$ with $\hat{y} = \frac{\sum_{(x,y) \in S} y}{|S|}$
+        \2 and the variance reduction will be (which is similar to information gain (IG))
+        \2 $VR(S,t) = Var(S) - \sum_{i=1}^{o} \frac{|S_{i}|}{|S|} Var(S_{i})$
+\end{outline}
+
+\subsection{Stop splitting nodes}
+\begin{outline}
+    \1 In principle, keep splittign untill all instances in a subset have the same Y value
+        \2 However, this is useful for task 1, but less useful for taks 2 (may cause overfitting problem!)
+        \2 Please remember this is not population, this is just a sampling sample.
+    \1 overfitting
+        \2 overfitting improves the consistency of the tree with the given data set D, but may decrease accuracy for instances outside D (whole population $\mathcal{D}$)
+    \1 How to avoid overfitting?
+        \2 "cautious splitting": do not split a node unless you are certain that the split is meaningful
+        \2 "post-pruning": do not bother about overfitting while splitting nodes, but once the (large) tree has been built, prune away branches that turned out not to contribute much
+    \1 "Cautious splitting"
+        \2 How do we know when not to split a node any further?
+            \3 a simple approach: try to guess when accuracy on unseen data is going down (\textbf{"the turning point"})
+        \2 But how canwe guess this turning point, if the data is unseen?
+            \3 Solution: we can use "validation data" to evaluate
+            \3 this "validation data" is not for growing tree, only for estimating accuracy on "unseen" data
+    \1 "Post-pruning"
+        \2 What if the accuracy will increase again? - afraid to end the growth too early
+            \3 Solution: we can compute the whole data set, then find its highest point
+        \2 Princeple
+            \3 grow the tree to its full size, then cut away branches that did not contribute to getting better predictions
+            \3 How to decide which branch does not contribute
+                \4 check for each node in the tree, starting at the bottom: "what would be the accuracy if I cut the tree here?" - if that accuracy is not lower, cut the tree, otherwise, do not cut.
+    \1 Pros and Cons
+        \2 post-pruning requires more effort to build a large tree, while it gives more accurate tree
+        \2 catious splitting is more efficient, while the accuracy is not as good as post-pruning
+\end{outline}
+
+\subsection{A generic algorithm}
+\begin{outline}
+    \1 TDIDT = "Top-down induction of decision trees", also referred to as "recursive partitioning"
+    \1 most decision tree learners follow the same basic approach, but differ in the details
+        \2 we will have a look at the commonalities and differences
+\end{outline}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[height=5cm]{../figs/TDIDT_algorithm}
+    \caption{Algorithm for "Top-down in duction of decision trees"}
+    \label{fig:tdidt_algorithm}
+\end{figure}
+\begin{outline}
+    \1 The blue functions are where implementations differ
+        \2 \textcolor{blue}{prune\_tree}: how to prune the tree afterward
+        \2 \textcolor{blue}{generate\_tests}: which tests to consider
+        \2 \textcolor{blue}{best\_test}: which test to select (use heuristics: entropy or variance)
+        \2 \textcolor{blue}{stop\_criterion}: when to stop (cautious splitting or post-pruning)
+        \2 \textcolor{blue}{info}: what information to store in the leaf
+    \1 \textcolor{blue}{generate\_tests}
+        \2 for numerical attributes: oblique trees can be used for determining c(threshold), while it will be more difficult even though it has higher accuracy. Thus, in practice, non-oblique trees are much more common.
+    \1 \textcolor{blue}{best\_test}
+        \2 for classification trees: information gain (IG) = reduction to entropy $CE(S) = - \sum_{i=1}^{k} p_{i} \log_{2}{p_{i}}$
+            \3 in some cases: "Gini impurity" instead of entropy: $Gini(S) = 1 - \sum_{i=1}^{k} p_{i}^{2}$
+        \2 for regression trees: reduction of variance $\sigma$, or reduction of standard deviation $\sqrt{\sigma}$
+            \3 in some cases: normalization is impelmented by "Split information" (SI): $SI(S,t) = - \sum_{i=1}^{n} \frac{|S_{i}|}{|S|} \log_{2}{\frac{|S_{i}|}{|S|}}$
+            \3 and the Gain Ratio (GR) will be: $GR(S,t) = \frac{IG(S,t)}{SI(S,t)}$
+        \2 for numerical inputs, how to determine c?
+            \3 Solution: typically, all values are tried, and the c that yields the best heuristic value (IG, GR, Gini, ...) is selected (best of them)
+    \1 \textcolor{blue}{info}
+        \2 for classification trees: usually, the most frequent class
+        \2 for regression trees: usually, the mean of all target values in that leaf
+            \3 possible: median
+    \1 \textcolor{blue}{stop\_criterion}
+        \2 1. cautious splitting, post-pruning
+        \2 2. threshold
+            \3 classification: all instances have the same class, pure
+            \3 regression: variance 
+        \2 too few examples to continue splitting
+            \3 only allow tests that yield subtrees with at least two examples each
+    \1 impurity measures
+        \2 good impurity measures are strictly concave <- \textcolor{red}{Question: do not understand!!}
+\end{outline}
+
+\subsection{Computational complexity}
+\begin{outline}
+    \1 Given a data set D consisting of N instances (x,y), where x has m components (attribtues), how do N and m influence the computational effort required to learn a tree?
+    \1 "Splitting one node" - for each node, we need to "find the best test"
+        \2 for each possible test, evaluate its quality
+            \3 partition the dataset according to this test
+            \3 compute quality based on this partition
+        \2 for the test with highest quality
+            \3 partition data according to that test
+    \1 Efficiently computing test quality for continous attribtues
+        \2 first \textbf{sort} all tuples according to A (attribute), small to large
+        \2 then gradually move the threshold, and simply update the tables
+        \2 thus, testing \textbf{all thresholds} is only slightly more work than testing one!
+    \1 Computing the quality of one test
+        \2 for nominal attributes: 1 scan, gradually building the table; compute IG once, at the end
+        \2 for continous attributes: 1 scan, gradually updating the table; compute IG for each intermediate table
+        \2 hence, computing the best test for a node is linear in the number of instances in that node $O(n)$, with n the numebr of instances
+        \2 Complexity:
+            \3 compute quality of one test is $O(n)$
+            \3 compute quality of all tests is $O(nm)$, with m the number of attributes
+    \1 Splitting multiple nodes
+        \2 the total at one level of the tree is always n, so the overal amount of work depends on the layer of the trees
+            \3 if the splits are balanced, the height of tree is $O(log(N))$, and the overall compelxity of tree growth is $O(mN\log_{2}(N))$
+            \3 if the splits however are unbalanced, the height of tree is $O(N)$, and the complexity is $O(mN^{2})$
+    \1 For impurity measures
+        \2 "pure" = "zero variance/entropy"
+    \1 Why decision tree for Big Data?
+        \2 QUICK! and FAST! efficient!
+        \2 high accuracy
+        \2 interpretable can be also a reason
+\end{outline}
+
+\subsection{Missing values}
+\begin{outline}
+    \1 when computing quality of a test: just ignore instances where this value is missing
+    \1 when splitting on an attribute:
+        \2 guess its most likely value
+        \2 partially assign the example to multiple branch, with its probability
+\end{outline}
+
+\subsection{Model trees}
+Model trees are \textbf{regression tree} in which each leaf does not contain a constant, but a linear model.
+\begin{outline}
+    \1 RETIS (M5)
+    \1 Mauve
+\end{outline}
+
+\subsection{Multi-target trees}
+\begin{outline}
+    \1 Classification and regression trees are very popular for predicting one target variable
+    \1 But the principle of variance reduction is easily generalized to predicting vectors!
+    \1 This allow us to predict multiple variables at the same time, using one tree. \textbf{(vector)}
+    \1 Multi-label classification
+        \2 How? For example for Y = \{a,b,c,d,e\}
+        \2 Option 1: "binary relevance"
+            \3 learn (y/n) decision tree for each label
+            \3 TreeA predicts a(y/n), TreeB predicts b(y/n)
+        \2 Option 2: "label powersets" 
+            \3 consider each set as separate label, for 5 original labels a,b,c,d,e, we get 32 combined labels: -,a,b,c,d,e,ab,ac, ..., abc, ...
+            \3 Learn a tree that predicts the combined label
+        \2 Option 3: "Vector encoding"
+            \3 encode each set as 0/1 vector, e.g. \{a,b,d\} = [1,1,0,1,0]
+            \3 use a learner that can learn models that predict vectors
+        \2 Option 3: "Vector encoding" is better! Requires almost no changes in the algorithm.
+            \3 for example a leaf contains \{[1,1,0,1,0],[1,1,0,0,0],[1,1,0,1,1]\} -> [1,1,0,0.67,0.33]
+            \3 predict all labels by threshold (e.g. 0.5): [1,1,0,0.67,0.33] -> \{a,b,d\}
+    \1 Hierarchical multilabel classification (HMC)
+        \2 for protein
+        \2 similar just add a constrant "a label can only occur in an instance's label set if all its ancestors also occur"
+            \3 250 functions = 250 trees is not fast and interpretable!
+            \3 250 functions = 1 tree is fast and interpretable!
+            \3 learn 1 tree that predicts 250-dimensional class vector
+        \2 Decision tree can be converted to rules set
+\end{outline}
+
+\subsection{Practical software}
+\begin{outline}
+    \1 Weka
+    \1 PythonL scikit-learn
+    \1 others: R, SAS, SPSS
+\end{outline}
+
