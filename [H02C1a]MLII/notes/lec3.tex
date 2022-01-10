@@ -1,0 +1,141 @@
+\subsection{Linear regression}
+Decision tree vs. linear regression
+\begin{outline}
+    \1 "Linear model": $Y = a + b_{1}X_{1} + b_{2}X_{2} + ... + b_{k}X_{k}$
+        \2 usually fit such that sum of squared vertical deviations from line is minimal
+        \2 what can we learn from such linear model?
+            \3 for predicting Y, given Xi
+            \3 for understanding how well Y can be predicted from Xi
+            \3 for understanding what the effect of each Xi is on Y
+            \3 for visualizing the connection between Xi and Y
+            \3 the linear correlation r tells us how well the points fit a line $-1 \le r \le 1$
+            \3 the coefficient of determination $R^{2}$ tells us to what extent Y is determined by the $X_{i}$, $0 \le R^{2} \le 1$
+        \2 careful with interpretation of coefficients
+            \3 coefficients are not scale-free
+            \3 "multicollinearity": correlations among $X_{i}$
+    \1 important assumptions
+        \2 effect of each variable on target is constant (does not depend on other variables)
+        \2 effect of different variables are cumulative (add up)
+    \1 complex terms
+        \2 "overall" coefficient of $X_{2}$ is $(b_{2} + b_{12}X_{1})$ effect of $X_{2}$ on $Y$ depends on $X_{1}$
+    \1 nominal variables
+        \2 for nominal $X_{i}$ with k values, introduce k-1 "0/1" variables, called "indicator" or "dummy" variables <- \textcolor{red}{Question: do not understand the dummy!!!}
+\end{outline}
+
+\subsection{Trees vs. linear regression vs. inductive bias}
+\begin{outline}
+    \1 Each learning approach has a "bias": implicit assumptions it makes.
+    \1 Removing all bias?
+        \2 bias-free learning is imporssible!
+        \2 no single best method for learning!
+        \2 for VS, the bias is "it assumes conjunctive concepts". -> without bias, no generalization.
+        \2 all of learning models have their own bias = implicit assumptions about what properties the true model has    
+    \1 Choices to make
+        \2 Modelling your problem as a prediction tasks:
+            \3 What is input, what is output (target attribute)?
+            \3 Regression, classification, probability prediction?
+        \2 Choosing a learning approach
+            \3 Efficiency of learning/prediction phase
+            \3 Bias (which more fits the problem)
+            \3 interpretability of returned models (interpretation)
+\end{outline}
+
+\subsection{Rule learning}
+Learning sets of classification rules: rule sets:
+\begin{enumerate}
+    \item "if...then..."
+    \item "if...then...else..."
+\end{enumerate}
+\begin{outline}
+    \1 Example: rule sets - define a leap years
+        \2 If year is multiple of 400 then leap
+        \2 else if year is a multiple of 100 then not leap
+        \2 else if year is multiple of 4 then leap
+        \2 else not leap
+    \1 A decision tree can be turned into a set of rules!
+        \2 By learning decision tree to learn rule sets
+    \1 principle
+        \2 1. High accuracy: when it makes a prediction, it should be correct
+        \2 2. Reasonable coverage: it needs not make a prediction for each instance, but the more, the better
+    \1 Coule be top-down or bottom-up
+        \2 Top-down:
+            \3 Start with maximally generally rule
+            \3 add literals one by one
+            \3 gradually maximize accuracy without sacrificing coverage
+        \2 Bottom-up:
+            \3 Start with maximally specific rule
+            \3 remove literals one by one
+            \3 gradually maximize coverage without sacrificing accuracy
+\end{outline}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[height=5cm]{../figs/RS_algorithm.eps}
+    \caption{Algorithm for "General algorithm for rule learning"}
+    \label{fig:rulesets_algorithm}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[height=6cm]{../figs/RSOL_algorithm.eps}
+    \caption{Algorithm for "General algorithm for learning one rule"}
+    \label{fig:learnonerule_algorithm}
+\end{figure}
+
+\begin{outline}
+    \1 Top-down: start with an empty rule
+    \1 Heuristics for rule learners
+        \2 High accuracy (most important), it is not robust to noise
+        \2 reasonably high coverage
+    \1 if-then-else rules vs. decision lists
+        \2 if-then-else rules
+            \3 if year is a multiple of 400 then leap
+            \3 else if year is a multiple of 100 then not leap
+            \3 else if year is multiple of 4 then leap
+            \3 else not leap
+        \2 decision lists
+            \3 if year is a multiple of 400 then leap
+            \3 if year is multiple of 4 but not of 100 then leap
+        \2 if-then-else rule is more interpretable
+        \2 decision list is more compact
+        \2 unordered rules vs. ordered rules <- \textcolor{red}{Question: do not understand!!!}
+    \1 example-driven top-down rule induction
+        \2 works like regular top-down approach, except:
+            \3 pick a not-yet-covered example
+            \3 consider as hypothesis space, all the rules that cover this example
+            \3 search within this hypothesis spaces (much smaller)
+        \2 \textbf{pros:} more efficient
+        \2 \textbf{cons:} less robust to noise
+    \1 other examples: RIPPER, Weka (software)
+\end{outline}
+
+\subsection{Association rules}
+\begin{table}[htbp]\footnotesize
+    \centering
+    \caption{Differences with Classification and association rules}
+    \begin{tabularx}{\textwidth}{X|X}
+    \toprule
+    \textbf{Classification rules}&\textbf{Association rules} \\
+    \hline
+    One target class&Any combinatino of items can be the target \\
+    \hline
+    Good rules have near 100\% accuracy ("confidence" here)&Rules need not have near 100\% confidence to be interesting \\
+    \hline
+    Find a minimal set of rules (just enough to classify)&Find a maximal set of rules (all rules that hold) \\
+    \bottomrule
+    \end{tabularx}
+    \label{tab:diff_classification_association_rules}
+\end{table}
+
+\begin{outline}
+    \1 Overview
+        \2 Similar to classification rules, but for descriptive learning instead of predicitve learning
+        \2 is to look for the patterns in data
+        \2 classification rules are a small subset of association rules?
+    \1 General format: if $a_{1}, a_{2}, ..., a_{n}$ then $a_{n+1}, a_{n+2}, ..., a_{n+m}$
+    \1 Rule "If <this> then <that>" is charaterized by
+        \2 Support: \% of all clients that buy <this>
+        \2 Confidence: \% of buyers of <this> that also buy <that>
+    \1 Running a classification rule learner clearly will not work well for association rule, since classification rule is only a small subset of association rule
+        \2 Solution: APRIORI algorithm
+\end{outline}
+\pagebreak

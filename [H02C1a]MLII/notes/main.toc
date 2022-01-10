@@ -5,21 +5,29 @@
 \contentsline {subsection}{\numberline {1.4}Some basic concepts and terminology}{2}{}%
 \contentsline {subsection}{\numberline {1.5}Input formats (predictive learning)}{3}{}%
 \contentsline {subsection}{\numberline {1.6}Output formats, methods (predictive learning)}{4}{}%
-\contentsline {section}{\numberline {2}Lecture 2: Induction of decision tree}{5}{}%
-\contentsline {subsection}{\numberline {2.1}Overview of DT}{5}{}%
-\contentsline {subsection}{\numberline {2.2}Learn trees from data}{6}{}%
+\contentsline {section}{\numberline {2}Lecture 2: Induction of decision tree}{6}{}%
+\contentsline {subsection}{\numberline {2.1}Overview of DT}{6}{}%
+\contentsline {subsection}{\numberline {2.2}Learn trees from data}{7}{}%
 \contentsline {subsection}{\numberline {2.3}Choosing the best test}{7}{}%
-\contentsline {subsection}{\numberline {2.4}Stop splitting nodes}{8}{}%
-\contentsline {subsection}{\numberline {2.5}A generic algorithm}{9}{}%
+\contentsline {subsection}{\numberline {2.4}Stop splitting nodes}{9}{}%
+\contentsline {subsection}{\numberline {2.5}A generic algorithm}{10}{}%
 \contentsline {subsection}{\numberline {2.6}Computational complexity}{11}{}%
-\contentsline {subsection}{\numberline {2.7}Missing values}{12}{}%
-\contentsline {subsection}{\numberline {2.8}Model trees}{12}{}%
-\contentsline {subsection}{\numberline {2.9}Multi-target trees}{12}{}%
-\contentsline {subsection}{\numberline {2.10}Practical software}{13}{}%
-\contentsline {section}{\numberline {3}Lecture 3: Learning sets of rules}{14}{}%
-\contentsline {section}{\numberline {4}Lecture 4: Instance-based learning, Clustering}{14}{}%
-\contentsline {section}{\numberline {5}Lecture 5: Evaluating hypotheses}{14}{}%
-\contentsline {section}{\numberline {6}Lecture 6: Numerical approaches (ANN, SVM), Computational learning theory}{14}{}%
-\contentsline {section}{\numberline {7}Lecture 7: Probabilistic approaches, Ensembles}{14}{}%
-\contentsline {section}{\numberline {8}Lecture 8: Reinforcement learning}{14}{}%
-\contentsline {section}{\numberline {9}Lecture 9-10: Inductive logic programming}{14}{}%
+\contentsline {subsection}{\numberline {2.7}Missing values}{13}{}%
+\contentsline {subsection}{\numberline {2.8}Model trees}{13}{}%
+\contentsline {subsection}{\numberline {2.9}Multi-target trees}{13}{}%
+\contentsline {subsection}{\numberline {2.10}Practical software}{14}{}%
+\contentsline {section}{\numberline {3}Lecture 3: Learning sets of rules}{15}{}%
+\contentsline {subsection}{\numberline {3.1}Linear regression}{15}{}%
+\contentsline {subsection}{\numberline {3.2}Trees vs. linear regression vs. inductive bias}{15}{}%
+\contentsline {subsection}{\numberline {3.3}Rule learning}{16}{}%
+\contentsline {subsection}{\numberline {3.4}Association rules}{18}{}%
+\contentsline {section}{\numberline {4}Lecture 4: Instance-based learning, Clustering}{20}{}%
+\contentsline {subsection}{\numberline {4.1}Instance-based learning}{20}{}%
+\contentsline {subsection}{\numberline {4.2}Clustering}{22}{}%
+\contentsline {section}{\numberline {5}Lecture 5: Evaluating hypotheses}{27}{}%
+\contentsline {subsection}{\numberline {5.1}Models and learning algorithms}{27}{}%
+\contentsline {subsection}{\numberline {5.2}Statistics}{27}{}%
+\contentsline {section}{\numberline {6}Lecture 6: Numerical approaches (ANN, SVM), Computational learning theory}{30}{}%
+\contentsline {section}{\numberline {7}Lecture 7: Probabilistic approaches, Ensembles}{30}{}%
+\contentsline {section}{\numberline {8}Lecture 8: Reinforcement learning}{30}{}%
+\contentsline {section}{\numberline {9}Lecture 9-10: Inductive logic programming}{30}{}%
