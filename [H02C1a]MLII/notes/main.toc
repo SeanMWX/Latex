@@ -27,7 +27,9 @@
 \contentsline {section}{\numberline {5}Lecture 5: Evaluating hypotheses}{27}{}%
 \contentsline {subsection}{\numberline {5.1}Models and learning algorithms}{27}{}%
 \contentsline {subsection}{\numberline {5.2}Statistics}{27}{}%
-\contentsline {section}{\numberline {6}Lecture 6: Numerical approaches (ANN, SVM), Computational learning theory}{30}{}%
-\contentsline {section}{\numberline {7}Lecture 7: Probabilistic approaches, Ensembles}{30}{}%
-\contentsline {section}{\numberline {8}Lecture 8: Reinforcement learning}{30}{}%
-\contentsline {section}{\numberline {9}Lecture 9-10: Inductive logic programming}{30}{}%
+\contentsline {subsection}{\numberline {5.3}Comparison of evaluation}{31}{}%
+\contentsline {section}{\numberline {6}Lecture 6: Numerical approaches (ANN, SVM), Computational learning theory}{33}{}%
+\contentsline {subsection}{\numberline {6.1}Learning theory}{33}{}%
+\contentsline {section}{\numberline {7}Lecture 7: Probabilistic approaches, Ensembles}{33}{}%
+\contentsline {section}{\numberline {8}Lecture 8: Reinforcement learning}{33}{}%
+\contentsline {section}{\numberline {9}Lecture 9-10: Inductive logic programming}{33}{}%

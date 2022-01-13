@@ -93,6 +93,7 @@
         \2 no obvious reference point
             \3 sample imbalance
         \2 unstable when class distribution may change
+            \3 because classifer has different TP and TN
         \2 \emph{assumes symmetric misclassification costs}
     \1 alternatives
         \2 correlation
@@ -134,8 +135,62 @@
         \2 consider "misclassification costs"
             \3 $C_{FP}$: cost of a false positive (cost of classifying a - as pos)
             \3 $C_{FN}$: cost of a false negative (cost of classifying a + as neg)
-
+        \2 expected cost of a single prediction
+            \3 $C = C_{FP}P(pos|-)P(-) + C_{FN}P(neg|+)P(+)$
+            \3 estimated by $C = C_{FP} \cdot FP \cdot T_{-}/T + C_{FN} \cdot FN \cdot T_{+}/T$
+    \1 ROC (Receiver operating characteristic) analysis
+        \2 Allow us to see
+            \3 how well a classifier will perform given certain misclassification costs and class distribution
+            \3 in which environments one classifer is better than another
+        \2 Overview: a ROC diagram plots (estimated) TP vs. FP for a classifer
+            \3 $TP = \frac{A}{T_{+}}$
+            \3 $FP = \frac{B}{T_{-}}$
+            \3 why $T_{+}$ and $T_{-}$ instead of $T_{pos}$ and $T_{neg}$?
+        \2 1 classifier = 1 point in the ROC diagram
+            \3 higher is better (better TP), more to the left is better (lower FP)
+            \3 TP = 1: no positives forgotten
+            \3 FP = 0: no negatives can pretent positives
+    \1 Rank classifer
+        \2 a rank classifer returns a numerical score, rather than pos/neg
+            \3 expresses uncertainty: higher score = more certain of pos
+            \3 numerical score can be turned into binary prediction by choosing a threshold
+            \3 changing the threshold gives different poitns in the diagram, forming ROC curve
+    \1 Iso-cost line
+        \2 given cost $c_{FP}$ and $c_{FN}$, the exptected cost of a classifier with TP and FP is $c = c_{FP} \cdot FP \cdot \frac{T_{-}}{T} + c_{FN} \cdot (1-TP) \cdot \frac{T_{+}}{T}$
+        \2 hence, for a \textbf{constant cost c}, the points with the cost are on the following line - called an iso-cost line:
+            \3 $TP = \frac{c_{FP}T_{-}}{c_{FN}T_{+}} + 1 - \frac{cT}{c_{FN}T_{+}}$
+    \1 Convex hull
+        \2 set of classifers = set of points in ROC diagram
+        \2 classifers that are optimal under some condition are on the convex hull of this set (if can be compared, highest is the optimal, other is not on the convex hull)
+    \1 precision-recall diagram
+        \2 like ROC, defined for binary (pos/neg) predictions
+            \3 Precision: what proportion of positive predictions is really positive? using $P(+|pos)$
+            \3 Recall: what proportion of postiives is predicted positive? using $P(pos|+)$
+        \2 like with ROC
+            \3 classifer -> point
+            \3 rank classifer -> curve
 \end{outline}
 
+\subsection{Comparison of evaluation}
+\begin{outline}
+    \1 Evaluation
+        \2 evaluting classifer
+            \3 discussed above
+        \2 evaluting regression models
+            \3 SSE, MSE, RE, correlation
+        \2 evaluting clustering
+            \3 explicit objective, internal criteria, external criteria
+        \2 evaluating learners
+            \3 two questions
+                \4 Q1: given models $f_{1}$ and $f_{2}$, which one has better predictive accuracy?
+                \4 Q2: given learners $L_{1}$ and $L_{2}$ and data set S, which learner can be expected to build best model from (data set like) S?
+            \3 Q2 is more difficult to answer than Q1, additional level of varaition
+            \3 Q2 is only meaningful when restricted to a particular problem domain, and data set of a particular size
+            \3 statisticians distinguish
+                \4 Conditional accuracy: mean accuracy of models learned by L on a given dataset S
+                \4 Unconditional accuracy: mean accuracy of models learned by L on datasets of size n drawn randomly from the population (from population)
+            \3 comparing learners
+                \4 making some rules, description language
+\end{outline}
 
-
+\pagebreak

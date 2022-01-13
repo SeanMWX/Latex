@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.12.22)  10 JAN 2022 23:32
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.12.22)  11 JAN 2022 00:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -297,12 +297,6 @@ File: l3backend-xetex.def 2021-12-14 L3 backend support: XeTeX
 
 LaTeX Warning: Label `tab:diff_classification_association_rules' multiply defined.
 
-
-LaTeX Warning: Label `tab:diff_classification_association_rules' multiply defined.
-
-
-LaTeX Warning: Label `tab:diff_classification_association_rules' multiply defined.
-
 )
 \openout1 = `main.aux'.
 
@@ -406,7 +400,7 @@ LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 2
  (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
-Overfull \hbox (0.4151pt too wide) in paragraph at lines 30--30
+Overfull \hbox (0.4151pt too wide) in paragraph at lines 31--31
  [] []\TU/lmr/bx/n/10 Lecture 6: Numerical approaches (ANN, SVM), Computational 
  []
 
@@ -445,12 +439,17 @@ Overfull \hbox (6.56154pt too wide) in paragraph at lines 61--62
 []\TU/lmr/m/n/10 Checked by confidence interval: $\LMS/ntxsy/m/n/10 ¹\OML/ntxmi/m/it/10 a[] \LMS/ntxsy/m/n/10 ^^@ \OML/ntxmi/m/it/10 a[]\LMS/ntxsy/m/n/10 º ^^F \OML/ntxmi/m/it/10 z[][]$ 
  []
 
-[28] [29])
+[28] [29] [30]
+Overfull \hbox (4.19194pt too wide) in paragraph at lines 187--188
+[]\TU/lmr/m/n/10 Q2 is more difficult to answer than Q1, additional level of varaition 
+ []
+
+[31]) [32]
 Overfull \hbox (11.57986pt too wide) in paragraph at lines 48--48
 []\TU/lmr/bx/n/14.4 Lecture 6: Numerical approaches (ANN, SVM),
  []
 
-(./lec6.tex) (./lec7.tex) [30] (./main.aux)
+(./lec6.tex) (./lec7.tex) [33] (./main.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
@@ -466,6 +465,6 @@ Here is how much of TeX's memory you used:
  26158 multiletter control sequences out of 15000+600000
  441359 words of font info for 106 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 55i,12n,62p,310b,389s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,12n,62p,310b,455s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (32 pages).
+Output written on main.pdf (35 pages).
