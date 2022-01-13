@@ -1,0 +1,196 @@
+\subsection{Models and learning algorithms}
+\begin{outline}
+    \1 Different levels of evaluation
+        \2 evaluation of learned models
+            \3 given the model, how well can we expect it to perform
+        \2 evaluation of learning algorithm
+            \3 given an algorithm, how well can we expect the models it learns to perform
+    \1 Evaluation of classifiers
+        \2 probability of making a correct prediction: accuracy
+        \2 time needed to make the prediction
+        \2 cost incurred by wrong predictions
+\end{outline}
+
+\subsection{Statistics}
+\begin{outline}
+    \1 accuracy
+        \2 accuracy = probability of correct prediction on a randomly drawn instances
+        \2 error = 1- accuracy
+        \2 estimating accuracy = estimating a probability over a population
+        \2 estimating probability from sample proportion: well-studied problem in inferential Statistics
+        \2 for probability $\pi$, sample proportion $p$ has $\mathbb{E}(p)=\pi$ and $Var(p)=\frac{\pi(1 - \pi)}{n}$
+        \2 Hence:
+            \3 point estimate: $\hat{\pi} = p$
+            \3 1-$\alpha$ confidence interval: $[p - z_{\alpha/2} \sqrt{\frac{p(1-p)}{n}}, p + z_{\alpha/2} \sqrt{\frac{p(1-p)}{n}}]$ with $z_{\alpha/2}$ such that $P(Z > z_{\alpha/2}) = \alpha/2$ if $Z \sim N(0,1)$
+\end{outline}
+
+\begin{table}[htbp]\footnotesize
+    \centering
+    \caption{Alpha for Confidence interval}
+    \begin{tabularx}{\textwidth}{X|X|X|X}
+    \toprule
+    \textbf{$\alpha$}&\textbf{0.1}&\textbf{0.05}&\textbf{0.01} \\
+    \hline
+    \textbf{$z_{\alpha/2}$}&1.64&1.96&2.56 \\
+    \bottomrule
+    \end{tabularx}
+    \label{tab:diff_classification_association_rules}
+\end{table}
+
+\begin{outline}
+    \1 train set and cross-validation
+    \1 option 1: train/test split
+        \2 use 2/3 of available data for training set T, set aside 1/3 for test set S
+        \2 while if T is smaller -> less accurate f, smaller S -> less accurate estimate of accuracy of f
+    \1 option 2: cross-validation 
+        \2 learn f from the full data set S
+        \2 however to get an estimate of acc(f), we parition the set into n subsets $S_{i}$
+        \2 learn $f_{i}$, i=1...n from $\frac{S}{S_{i}}$, compute $ACC(f,S_{i})$
+        \2 estiamte acc(f) as average of all $acc(f,S_{i})$
+        \2 name
+            \3 for a specific n, this is called n-fold cross-validation
+            \3 when n = |S|, this is called leave-one-out cross-validation
+        \2 Is cross-validation entirely unbiased - No
+        \2 More option: nested/internal cross-validation
+    \1 comparing two models
+        \2 given two models, which one has higher accuracy
+        \2 two cases
+            \3 compare 2 models on different test sets
+            \3 compare 2 models on same test sets
+        \2 different sets
+            \3 Checked by confidence interval: $(a_{1}-a_{2}) \pm z_{\alpha/2} \sqrt{\frac{a_{1}(1-a_{1})}{n_{1}} + \frac{a_{2}(1-a_{2})}{n_{2}}}$
+            \3 if CI for $a_{1}-a_{2}$ is entirely to the right of 0, meaning that $a_{1}-a_{2} \geq 0$, meaning that $acc(f_{1}) \geq acc(f_{2})$
+            \3 if CI for $a_{1}-a_{2}$ is entirely to the left of 0, meaning that $a_{1}-a_{2} \leq 0$, meaning that $acc(f_{1}) \leq acc(f_{2})$
+            \3 if CI contains 0, it means that there is no difference between $f_{1}$ and $f_{2}$
+        \2 same sets
+            \3 Compare models on the same data set is more informative
+            \3 uses more detailed information from test
+            \3 use McNemar\'s test in this case
+            \3 key idea: how often was $f_{1}$ right and $f_{2}$ wrong on the same example vs. how often was $f_{1}$ wrong and $f_{2}$ right on the same example
+                \4 if $B \approx C \approx (B+C)/2$, then accept $acc(f_{1}) = acc(f_{2})$
+                \4 otherwises, if $B$ deviates too much from $(B+C)/2$, then reject $acc(f_{1}) = acc(f_{2})$
+            \3 McNemar\'s test is more informative - but can only use it when individual predictions of both models on the same test set are available
+\end{outline}
+
+\begin{table}[htbp]\footnotesize
+    \centering
+    \caption{Table for McNemar\'s test}
+    \begin{tabularx}{\textwidth}{X|X|X}
+    \toprule
+    \textbf{ }&\textbf{$f_{1}$ right}&\textbf{$f_{1}$ wrong} \\
+    \hline
+    \textbf{$f_{2}$ right}&A&B \\
+    \hline
+    \textbf{$f_{2}$ wrong}&C&D \\
+    \bottomrule
+    \end{tabularx}
+    \label{tab:mcnemar_table}
+\end{table}
+
+\begin{outline}
+    \1 Evaluation based on accuracy is not always appropriate
+    \1 cons
+        \2 no obvious reference point
+            \3 sample imbalance
+        \2 unstable when class distribution may change
+            \3 because classifer has different TP and TN
+        \2 \emph{assumes symmetric misclassification costs}
+    \1 alternatives
+        \2 correlation
+        \2 ROC analysis
+\end{outline}
+
+\begin{outline}
+    \1 correlation
+        \2 correlation tends to be more informative for unbalanced classifiers
+        \2 $\phi = \frac{AD - BD}{\sqrt{T_{+} \cdot T_{T_{-} \cdot T_{pos} \cdot T_{neg}}}}$ with 1: perfect prediction, 0: no correlation (totally random), -1: predicting the exact opposite (1 and -1 both indicate strong relation, more focus on absolute number)
+\end{outline}
+
+\begin{table}[htbp]\footnotesize
+    \centering
+    \caption{Real class vs. predicted class}
+    \begin{tabularx}{\textwidth}{X|X|X|X}
+    \toprule
+    \textbf{ }&\textbf{+}&\textbf{-}&\textbf{Total} \\
+    \hline
+    \textbf{pos}&A&B&$T_{pos}$ \\
+    \hline
+    \textbf{neg}&C&D&$T_{neg}$ \\
+    \hline
+    \textbf{Total}&$T_{+}$&$T_{-}$&T \\
+    \bottomrule
+    \end{tabularx}
+    \label{tab:real_predicted_class_table}
+\end{table}
+
+\begin{outline}
+    \1 expected misclassification cost
+        \2 sometimes one type of mistake is worse than the other, accuracy ignores this (assumes all errors are euqally bad -> which are not correct usually)
+        \2 Solution
+            \3 accuracy: probability that some instance is classified correctly
+            \3 TP: "true positive rate": probability of a positive to be classified correctly
+            \3 TN: "true negative rate": probability of a negative to be classified correctly
+            \3 FP: "false positive rate": $FP = 1 - TN$. 
+            \3 FN: "false negative rate": $FN = 1 - TP$.
+        \2 consider "misclassification costs"
+            \3 $C_{FP}$: cost of a false positive (cost of classifying a - as pos)
+            \3 $C_{FN}$: cost of a false negative (cost of classifying a + as neg)
+        \2 expected cost of a single prediction
+            \3 $C = C_{FP}P(pos|-)P(-) + C_{FN}P(neg|+)P(+)$
+            \3 estimated by $C = C_{FP} \cdot FP \cdot T_{-}/T + C_{FN} \cdot FN \cdot T_{+}/T$
+    \1 ROC (Receiver operating characteristic) analysis
+        \2 Allow us to see
+            \3 how well a classifier will perform given certain misclassification costs and class distribution
+            \3 in which environments one classifer is better than another
+        \2 Overview: a ROC diagram plots (estimated) TP vs. FP for a classifer
+            \3 $TP = \frac{A}{T_{+}}$
+            \3 $FP = \frac{B}{T_{-}}$
+            \3 why $T_{+}$ and $T_{-}$ instead of $T_{pos}$ and $T_{neg}$?
+        \2 1 classifier = 1 point in the ROC diagram
+            \3 higher is better (better TP), more to the left is better (lower FP)
+            \3 TP = 1: no positives forgotten
+            \3 FP = 0: no negatives can pretent positives
+    \1 Rank classifer
+        \2 a rank classifer returns a numerical score, rather than pos/neg
+            \3 expresses uncertainty: higher score = more certain of pos
+            \3 numerical score can be turned into binary prediction by choosing a threshold
+            \3 changing the threshold gives different poitns in the diagram, forming ROC curve
+    \1 Iso-cost line
+        \2 given cost $c_{FP}$ and $c_{FN}$, the exptected cost of a classifier with TP and FP is $c = c_{FP} \cdot FP \cdot \frac{T_{-}}{T} + c_{FN} \cdot (1-TP) \cdot \frac{T_{+}}{T}$
+        \2 hence, for a \textbf{constant cost c}, the points with the cost are on the following line - called an iso-cost line:
+            \3 $TP = \frac{c_{FP}T_{-}}{c_{FN}T_{+}} + 1 - \frac{cT}{c_{FN}T_{+}}$
+    \1 Convex hull
+        \2 set of classifers = set of points in ROC diagram
+        \2 classifers that are optimal under some condition are on the convex hull of this set (if can be compared, highest is the optimal, other is not on the convex hull)
+    \1 precision-recall diagram
+        \2 like ROC, defined for binary (pos/neg) predictions
+            \3 Precision: what proportion of positive predictions is really positive? using $P(+|pos)$
+            \3 Recall: what proportion of postiives is predicted positive? using $P(pos|+)$
+        \2 like with ROC
+            \3 classifer -> point
+            \3 rank classifer -> curve
+\end{outline}
+
+\subsection{Comparison of evaluation}
+\begin{outline}
+    \1 Evaluation
+        \2 evaluting classifer
+            \3 discussed above
+        \2 evaluting regression models
+            \3 SSE, MSE, RE, correlation
+        \2 evaluting clustering
+            \3 explicit objective, internal criteria, external criteria
+        \2 evaluating learners
+            \3 two questions
+                \4 Q1: given models $f_{1}$ and $f_{2}$, which one has better predictive accuracy?
+                \4 Q2: given learners $L_{1}$ and $L_{2}$ and data set S, which learner can be expected to build best model from (data set like) S?
+            \3 Q2 is more difficult to answer than Q1, additional level of varaition
+            \3 Q2 is only meaningful when restricted to a particular problem domain, and data set of a particular size
+            \3 statisticians distinguish
+                \4 Conditional accuracy: mean accuracy of models learned by L on a given dataset S
+                \4 Unconditional accuracy: mean accuracy of models learned by L on datasets of size n drawn randomly from the population (from population)
+            \3 comparing learners
+                \4 making some rules, description language
+\end{outline}
+
+\pagebreak
