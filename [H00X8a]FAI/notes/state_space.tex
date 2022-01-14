@@ -1,0 +1,63 @@
+\subsection{Overview}
+How to represent a problem in machine? For a basic search problem, there are five ingredients.
+\begin{enumerate}
+    \item States: represent the states in a clear way
+    \item Actions: define the actions you can execute and change the world state, normally $\delta: X \rightarrow Y$
+    \item Initial state: what is the initial state, the \textbf{starting} point
+    \item Goal formulation: define which states you want to end
+    \item Specification of the search cost: the execution costs
+\end{enumerate} 
+
+\noindent
+Take Pac-man - path-finding as an example, which is shown below:
+\begin{outline}
+    \1 States: $(x,y)$, where x is x-axis and y is y-axis
+    \1 Initial state: starting point $(x_{0},y_{0})$
+    \1 Actions: different actions
+        \2 east: $f_{east}: (x,y) \rightarrow (x+1,y)$
+        \2 west: $f_{west}: (x,y) \rightarrow (x-1,y)$
+        \2 north: $f_{north}: (x,y) \rightarrow (x,y+1)$
+        \2 south: $f_{south}: (x,y) \rightarrow (x,y-1)$
+    \1 Goal test: goal point/state $(x^{*},y^{*})$
+    \1 Path cost: each step cost 1 step unit, only have <specific number> state unit
+\end{outline}
+
+\noindent
+Sometimes, we need a check-loop detection. We have two different structure for state-space representation: graph and search tree.
+\begin{outline}
+    \1 graph
+        \2 For graph, during searching, we often keep track of the already visited nodes to avoid loops and redundancies.
+    \1 search tree
+        \2 nodes show states, each node in the search tree is an entire PATH in the state space graph.
+\end{outline}
+
+\noindent
+Some key issues:
+\begin{outline}
+    \1 definition of state space and transition model
+    \1 choose implicit graph or implicit tree
+    \1 search forward or backward
+    \1 use optimal solution or any solution
+    \1 decompose difficult problem to simpler problem (problem reduction/ decomposability)
+\end{outline}
+
+\noindent
+For forward and backward search, the definition is shown as belwo. The efficiency can be improved based on different branching factor. However, backward is not always possible, e.g., playing chess.
+\begin{enumerate}
+    \item Forward: start from initial state and search towards goal
+    \item Backward: start from the goal state and search toward initial state
+\end{enumerate}
+
+\subsection{Summary}
+\begin{enumerate}
+    \item Before an agent can start to perform on searching problem, 5 ingredients are important:
+    \begin{enumerate}
+        \item State
+        \item Initial state
+        \item Goal state
+        \item Action
+        \item Cost
+    \end{enumerate}
+\end{enumerate}
+
+\pagebreak

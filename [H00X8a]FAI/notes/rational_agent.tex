@@ -1,0 +1,78 @@
+\subsection{Overview}
+\begin{outline}
+    \1 Rational agent
+        \2 Agent: an entity that perceives (from env.) and acts (to env.)
+        \2 Rational: maximizing expected utility
+        \2 Rational agent: selects actions that maximize its (expected) utility, i.e., they do the right thing.
+    \1 Different environments
+        \2 Accessible vs. inaccessible (fully observable vs. partially observable)
+            \3 environment is fully observed by agent?
+        \2 dterministic vs. stochasitic 
+            \3 is the next state of the envioronment completely determined by the current state?
+        \2 episodic vs. sequential
+            \3 can the quality of an action be evaluated within \textbf{an episode} (perception + action)?
+        \2 static vs. dynamic
+            \3 can the environment change while the agent is deliberating?
+            \3 dynamic - not turn-based game, static - mostly turn-based game
+        \2 discrete vs. continuous
+            \3 is the value discrete (nominal) or continuous (numerical)
+        \2 single vs. multi-agent
+            \3 which entities have to regarded as agents? (competitive or cooperative scenarios?)
+\end{outline}
+
+Example 
+\begin{table}[htbp]\footnotesize
+    \centering
+    \caption{Examples using different environments}
+    \begin{tabularx}{15cm}{X|XXXXXX}
+    \toprule
+    \textbf{Env.}&\textbf{Observable}&\textbf{Agents}&\textbf{Deterministic}&\textbf{Episodic}&\textbf{Static}&\textbf{Discrete} \\
+    \hline
+    \textbf{Crossword puzzle}&Fully&Single&Deterministic&\textcolor{red}{sequential}&\textcolor{red}{Static}&Discrete \\
+    \hline
+    \textbf{Chess with a clock}&&&&&& \\
+    \hline
+    \textbf{Poker}&&&&&& \\
+    \hline
+    \textbf{Backgammon}&&&&&& \\
+    \hline
+    \textbf{Taxi driving}&&&&&& \\
+    \hline
+    \textbf{Medical diagnosis}&&&&&& \\
+    \hline
+    \textbf{Image analysis}&&&&&& \\
+    \hline
+    \textbf{Part-picking robot}&&&&&& \\
+    \hline
+    \textbf{Refinery controller}&&&&&& \\
+    \hline
+    \textbf{English tutor}&&&&&& \\
+    \hline
+    \textbf{Pac-Mac}&Observable&Multi&\textcolor{red}{Stochasitic}&Sequential&\textcolor{red}{Dynamic}&Discrete \\
+    \bottomrule
+    \end{tabularx}
+    \label{tab:diff_classification_association_rules}
+\end{table}
+
+\begin{outline}
+    \1 Reflex agents
+        \2 choose (respond) action only based on current state
+        \2 do not consider the future consequences of their actions
+    \1 Planning/ Goal based agent
+        \2 choose action based on consequences of actions (future)
+        \2 consider how the world will be
+\end{outline}
+
+\subsection{Summary}
+\begin{enumerate}
+    \item an agent is something that perceives and acts, being rational is to obtain maximal expected value. An rational agent will take the action that maximizes its expected performance given the percept sequence and its knowledge of the environment.
+    \item an agent program maps from a percept to an action
+    \begin{enumerate}
+        \item reflex agents respond based on current state
+        \item goal-based agents respond based on current and future state
+        \item learning agents improve their behaviour over time
+    \end{enumerate}
+    \item some environments are more demanding than others
+\end{enumerate}
+
+\pagebreak
