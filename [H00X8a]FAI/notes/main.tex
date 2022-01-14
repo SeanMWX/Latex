@@ -1,0 +1,65 @@
+\documentclass{article}
+
+% include graph
+\usepackage{graphicx}
+% if then else
+\usepackage{ifthen}
+% for sub itermize
+\usepackage{outlines}
+% using color package
+\usepackage[usenames,dvipsnames]{color}
+% 用于产生一种数学用的花体字  
+\usepackage{mathrsfs}
+% 数学符号  
+\usepackage{amsmath,amssymb}
+% 专门处理数学粗体的bm宏包
+\usepackage{bm}
+% 高质量数学字体/黑体  
+\usepackage[cmintegrals]{newtxmath}
+% Expectation by \E
+% just use "\mathbb{E}"
+% \DeclareMathOperator{\E}{\mathbb{E}}
+% 英文花体, e.g., $\mathcal{D}$
+% use table
+\usepackage{tabularx}
+\usepackage{booktabs}
+% use tab
+\usepackage{tabto}
+% 可以换行的 \underline{}
+% \usepackage{ulem}
+%----------------------------- THE ARTICLE -------------------------------
+
+\begin{document}
+
+\input{../others/title_page}
+
+\pagenumbering{roman} 
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{Intro to AI}
+\input{intro_AI}
+\section{Rational agent}
+\input{rational_agent}
+\section{State space}
+\input{state_space}
+\section{Uniformed search}
+\input{uniformed_search}
+\section{Informal search}
+\input{informal_search}
+\section{CSP}
+
+\section{Pattern mining}
+
+\section{Game tree}
+
+\section{Planing}
+
+\section{MDP}
+
+\clearpage
+
+
+\end{document}
