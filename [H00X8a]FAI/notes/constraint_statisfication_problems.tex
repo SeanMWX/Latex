@@ -1,0 +1,163 @@
+\subsection{Overview}
+Two different tasking: planning and identification
+\begin{enumerate}
+    \item Planning: sequences of actions: path is important
+    \item Identification: assignments to variables: goal is important (CSP)
+\end{enumerate}
+
+\noindent
+What is CSP?
+\begin{outline}
+    \1 A special subset of search problems
+    \1 State is defined by varaible $X_{i}$ with values from a domain $D$
+    \1 Goal is a set of \textbf{constraints} specifying allowable combination of values for subsets of variables
+\end{outline}
+
+\noindent
+For example, the N-Queens problem: \\
+\begin{outline}
+    \1 Variables: $X_{i,j}$
+    \1 Domains: $D = {0,1}$
+    \1 Constraints: \textbf{(not allow touch together (1,1))}
+        \2 $\forall i,j,k (X_{i,j},X_{i,k} \in {(0,0),(0,1),(1,0)})$
+        \2 $\forall i,j,k (X_{i,j},X_{k,j} \in {(0,0),(0,1),(1,0)})$
+        \2 $\forall i,j,k (X_{i,j},X_{i+k,j+k} \in {(0,0),(0,1),(1,0)})$
+        \2 $\forall i,j,k (X_{i,j},X_{i+k,j-k} \in {(0,0),(0,1),(1,0)})$
+        \2 $\sum_{i,j} X_{i,j} = N$
+\end{outline}
+
+\subsection{Variaties of CSP}
+Variables can be classified as: \textbf{discrete variables} and \textbf{continuous variables}. And the discrete variable can be further classified as \textbf{finite domain} and \textbf{infinite domains}. \\
+Constrains can be classified as \textbf{hard constraints} and \textbf{soft constraints}. Hard constraint includes \textbf{unary constraint} involing a single variable: $SA \neq green$, or \textbf{binary constraint} involing pairs of variable: $SA \neq WA$, or even \textbf{higher-order constraints} involing 3 or more variables: $O + O = R + 10 \times X_{1}$. \textbf{Preferences} (soft constraint) is also important, which will be used in Constrained Optimization Problem.
+
+\subsection{Solution to CSP}
+The standard search formulation is defined as below (initial $\rightarrow$ assigning values to unassigned varaibles $\rightarrow$ check goal test):
+\begin{enumerate}
+    \item Initial state: the empty assignment, \{\}
+    \item Successor funtion: assign a value to an unassigned variables
+    \item Goal test: the current assignment is complete and satisfies all constraints
+\end{enumerate}
+
+\subsection{Backtracking}
+Backtracking search is the basic uniformed algorithm for solving CSPs. DSP with two improvements below is called "backtracking search". In CSP, DFS is better than BFS since BFS will check layer by layer which is unnecessary. 
+\begin{enumerate}
+    \item One variable at time - only consider assignments to a single variable at each step
+    \item Check constraints as you go - consider only values which do not conflict previous assignments
+\end{enumerate}
+
+\noindent
+The algorithm of backtracking search is shown as below: \\
+\tabto{0mm} \textbf{function} BACKTRACKING-SEARCH(csp) \textbf{returns} solution/ failure
+\tabto{5mm} \textbf{return} RECURSIVE-BACKTRACKING(\{\},csp)
+\\
+\tabto{0mm} \textbf{function} RECURSIVE-BACKTRACKING(assignment, csp) \textbf{return} solution/ failure
+\tabto{5mm} \textbf{if} assignment is complete \textbf{then return} assignment
+\tabto{5mm} var $\leftarrow$ SELECT-UNASSIGNED-VARIABLE(VARIABLE[csp], assignment, csp)
+\tabto{5mm} \textbf{for each} value \textbf{in} ORDER-DOMAIN-VALUES(var, assignment, csp) \textbf{do}
+\tabto{10mm} \textbf{if} value is consistent with assignment given CONSTRAINTS[csp] \textbf{then}
+\tabto{15mm} add \{var = value\} to assignment
+\tabto{15mm} var $\leftarrow$ RECURSIVE-BACKTRACKING(assignment, csp)
+\tabto{15mm} \textbf{if result $\neq$ failure}
+\tabto{20mm} \textbf{then return} result \textcolor{cyan}{\emph{\% Find answer, so return result}}
+\tabto{20mm} \textbf{else} remove \{var = value\} from assignment
+\tabto{5mm} \textbf{return} failure  \textcolor{cyan}{\emph{\% No completed solution found, so return failure}}
+
+
+\noindent
+\\ As we can see above, Backtracking = DFS + variable-ordering \emph{(select one variable)} + fail-on-violation \emph{(check constraint)}
+
+\subsection{Improvement on Backtracking}
+The improvement can be applied on three aspects: Ordering, Filtering and Structure:
+\begin{enumerate}
+    \item Ordering - which should be next, similar to heuristics
+    \item Filtering - can we detect inevitable failure in advance?
+    \item Structure - can we exploit the problem structure?
+\end{enumerate}
+
+\subsubsection{Filtering}
+\noindent
+Filtering: keep track of domains for unassigned variables and cross off bad options \\
+\textbf{Forward checking (FC)}: Corss off values that violate a constraint when added to the existing assignment; but not provide early detection for all failures. \textbf{Assign values to unassigned variables to check, and backtrack.} \textbf{Constraint propagation}: reason from constraint to constraint. \\
+\textbf{Consistency of a single arc (AC-3)}: An arc X $\rightarrow$ Y is consistent iff for \emph{every} x in the tail there is \emph{some} y in the head which could be assigned without violating the constraint. Important: if X loses a value, neighbors of X need to be rechecked! Arc consistency detects failure earlier than forward checking. It checks \textbf{all} arcs are consistency once time. \\
+Both constraint propagation and consistency of a single arc can be run as a \textbf{preprocessor} or \textbf{after each assignment}. \\
+The algorithm is shown as below: \\ \\
+\tabto{0mm} \textbf{function} AC-3(csp) \textbf{returns} false if an inconsistency is found and true otherwises
+\tabto{5mm} queue $\leftarrow$ a queue of arcs, initially all the arcs in csp \textcolor{cyan}{\emph{\% arcs: double direction ($X_{i},X_{j}$) and ($X_{j},X_{i}$) are different}}
+\tabto{5mm} \textbf{while} queue is not empty \textbf{do}
+\tabto{10mm} ($X_{i},X_{j}$) $\leftarrow$ POP(queue)
+\tabto{10mm} \textbf{if} REVISE(csp, $X_{i}$, $X_{j}$) \textbf{then}
+\tabto{15mm} \textbf{if} size of $D_{i}$ = 0 \textbf{then return} false
+\tabto{15mm} \textbf{for each $X_{k}$ in $X_{i}$.NEIGHBORS - \{$X_{j}$\} do}
+\tabto{20mm} add ($X_{k}$, $X_{i}$) to queue
+\tabto{5mm} \textbf{return} true
+
+\tabto{0mm} \textbf{function} REVISE(csp, $X_{i}$, $X_{j}$) \textbf{returns} true iff we revise the domain of $X_{i}$
+\tabto{5mm} revised $\leftarrow$ false
+\tabto{5mm} \textbf{for each $x$ in $D_{i}$ do}
+\tabto{10mm} \textbf{if} no value $y$ in $D_{j}$ allows ($x$,$y$) to satisfy the constraint between $X_{i}$ and $X_{j}$ \textbf{then} \\
+\tabto{15mm} delete $x$ from $D_{i}$
+\tabto{15mm} revised $\leftarrow$ true
+\tabto{5mm} \textbf{return} revised \\
+
+\noindent
+Difference between forward checking and arc consistency: forward check is global and arc consistency is local (may not detect failure as more as forward check (the global)). More further comparison is shown as below: 
+\begin{outline}
+    \1 Filtering with Forward Checking (FC)
+        \2 after assinging one variable, check the constraints that involve this variables
+    \1 Filtering with Arc Consistency (AC3)
+        \2 like FC, but if a variable changed, also check all constraints involing this variable (except itself)
+\end{outline}
+
+\subsubsection{Ordering}
+There are two types of ordering, as shown below. But there is a common principle: \textbf{fail-first}.
+\begin{enumerate}
+    \item Variable ordering - which one to assign first?
+    \begin{enumerate}
+        \item Minimum Remaining Values
+        \item Most Constratining Variables
+    \end{enumerate}
+    \item Value ordering - which value to try first?
+    \begin{enumerate}
+        \item Least Constraining Value
+    \end{enumerate}
+\end{enumerate}
+
+\noindent
+Minimum Remaining Values: choose the variable with the fewest legal left values in its domain $\rightarrow$ less values means less steps to iterate its remaining values $\rightarrow$ easy to check whether fail or success, fail-first. It is also called "Most Constrained Variable" \\
+
+\noindent
+Most Constraining Variables: choose the variable with the most constraints (only counting constraints involving other unassigned variables) $\rightarrow$ most constraints $\rightarrow$ easier to fail $\rightarrow$ fail-first. It is also called "max degree heuristics" \\
+
+\noindent
+Least Constraining Value: \textcolor{red}{given a choice of variable, choose the least constraining value.}Least value $\rightarrow$ closer to threshold $\rightarrow$ easier to delete. \textcolor{red}{$\leftarrow$ My guessing}. Why least rather than most? You can do this with most, actually.
+
+\subsubsection{Structure}
+\textbf{Independent substructure:} Some structure can be broken into subproblems, which can significantly improve the efficiency. Similar to Bi-direction search, from $O(b^{m})$ to $O(2 \times b^{\frac{m}{2}})$. \\
+\textbf{Value symmetry:} in many CSP problems, there are many symmetries, we can reduce the search space by using \textbf{symmetry breaking constraints.}
+
+\subsection{Constraint Optimization}
+COP = Constraint Optimization Problem. It uses "branch-and-bound", similar to uniformed search. \\
+\textbf{Key idea:} 
+\begin{enumerate}
+    \item maintain the 'best' objective value so far
+    \item constrain solutions to be better than the 'best'
+\end{enumerate}
+
+\subsection{Summary}
+\begin{enumerate}
+    \item CSPs are a special kind of search problem
+    \begin{enumerate}
+        \item States are partial assignments
+        \item Goal test defined by constraints
+    \end{enumerate}
+    \item Basic solution: backtracking search
+    \item Speed-up
+    \begin{enumerate}
+        \item Filtering - FC, AC3
+        \item Ordering - Minimum Remaining Values, Most Constraining Variables, Least Constraining Value
+        \item Structure - substructure, symmetry breaking constraints
+        \item Optimization - branch-and-bound
+    \end{enumerate}
+\end{enumerate}
+
+\pagebreak
