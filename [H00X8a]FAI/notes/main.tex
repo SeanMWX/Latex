@@ -26,7 +26,12 @@
 % use tab
 \usepackage{tabto}
 % 可以换行的 \underline{}
-% \usepackage{ulem}
+% \usepackage{ulem} bug: 与emph冲突
+% 文字的删除线 \st
+\usepackage{soul}
+% tickz 画图
+\usepackage{tikz}
+\usetikzlibrary{graphs}
 %----------------------------- THE ARTICLE -------------------------------
 
 \begin{document}
@@ -50,11 +55,11 @@
 \section{Informal search}
 \input{informal_search}
 \section{CSP}
-
+\input{constraint_statisfication_problems}
 \section{Pattern mining}
-
+\input{pattern_mining}
 \section{Game tree}
-
+\input{game_tree}
 \section{Planing}
 
 \section{MDP}

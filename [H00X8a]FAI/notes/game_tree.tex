@@ -1,0 +1,148 @@
+\subsection{Games}
+There are different kind of games: 
+\begin{outline}
+    \1 Deterministic or stochastic game
+    \1 Multi-player or single player game
+    \1 Zero-sum or general game
+    \1 Board game \textcolor{blue}{$\leftarrow$ we will focus on this!}
+\end{outline}
+
+\noindent
+A good game program/ strategy should have the properties that
+\begin{enumerate}
+    \item delete \textbf{irrelevant branches} of the search tree
+    \item use \textbf{goof evaluation functions} for in-between states
+    \item \textbf{look ahead} as many moves as possible
+\end{enumerate}
+
+\subsection{Minimax}
+\subsubsection{Terminology}
+Soem terminology of two-person board games:
+\begin{outline}
+    \1 Players are \textbf{min} and \textbf{max}, where max begins
+    \1 \textbf{Initial} position
+    \1 \textbf{Operators}, actions
+    \1 \textbf{Game tree} is the search tree generated from the possible moves
+    \1 \textbf{Termination} test, determines when the game is over and what the \textbf{value of final state} is
+    \1 \textbf{Strategy}
+\end{outline}
+
+\subsubsection{Algorithm}
+\noindent
+For minimax algorithm, we use DFS to generate the game tree. We will apply \textbf{utility function}/ heuristics function to each terminal state. During the minimax, max should have the highest value, and min will always choose the worst-value step for max (they are opponents!). The algorithm is shown as below: 
+
+\tabto{0mm} \textbf{function} MINIMAX-SEARCH(game, state) \textbf{returns} an action
+\tabto{5mm} player $\leftarrow$ game.TO-MOVE(state)
+\tabto{5mm} value,move $\leftarrow$ MAX-VALUE(game,state)
+\tabto{5mm} \textbf{return} move
+
+\tabto{0mm} \textbf{function} MAX-VALUE(game,state) \textbf{returns} a (utility,move) pair
+\tabto{5mm} \textbf{if} game.IS-TERMINAL(state) \textbf{then return} game.UTILITY(state,player),null
+\tabto{5mm} v $\leftarrow$ $- \infty$
+\tabto{5mm} \textbf{for each $a$ in} game.ACTIONS(state) \textbf{do}
+\tabto{10mm} v2,a2 $\leftarrow$ MIN-VALUE(game,game.RESULT(state,a))
+\tabto{10mm} \textbf{if} v2 $>$ v \textbf{then}
+\tabto{15mm} v,move $\leftarrow$ v2,a
+\tabto{5mm} \textbf{return} v,move
+
+\tabto{0mm} \textbf{function} MIN-VALUE(game,state) \textbf{returns} a (utility,move) pair
+\tabto{5mm} \textbf{if} game.IS-TERMINAL(state) \textbf{then return} game.UTILITY(state,player),null
+\tabto{5mm} v $\leftarrow$ $+ \infty$
+\tabto{5mm} \textbf{for each $a$ in} game.ACTION(state) \textbf{do}
+\tabto{10mm} v2,a2 $\leftarrow$ MAX-VALUE(game,game.RESULT(state,a))
+\tabto{10mm} \textbf{if} v2 $<$ v \textbf{then}
+\tabto{15mm} v,move $\leftarrow$ v2,a
+\tabto{5mm} \textbf{return} v,move
+
+\subsubsection{Evaluation function}
+The evaluation function is important! Some examples are shown below:
+\begin{outline}
+    \1 Material value: pawn/1, knight/3, queen/9
+    \1 Other: king safety, good pawn structure
+    \1 Rule of thumb: three-point advantage
+\end{outline}
+
+\noindent
+The preffered evaluation functions are \textbf{weighted, linear functions}: $w_{1}f_{1} + w_{2}f_{2} + ... + w_{n}f{n}$, where $w_{i}$ are the weights and the $f_{i}$ are the features of the board. However, it has a strong assumption that all of features are \textbf{independent}, which is unrealistic.
+
+\subsubsection{Stopping criteria}
+Stopping critiera can be fixed-depth or iterative deepening (when time is over.) However, only stop and evaluate in \textbf{quiescent positions} that will not cause large fluctuations. Because we do not know what happen if so large fluctuations happen may cause $\rightarrow$ \textcolor{blue}{\textbf{horizon effect:} try to delay lose but fail and with more cost}.
+
+\subsection{Alpha-Beta Search}
+It is an optimization of minimax algorithm, which helps improve its efficiency. Instead of generating tree $\rightarrow$ propogating the values upwards in the tree. We try to \textbf{interleave these two steps}, meaning that exploit $\rightarrow$ propogate $\rightarrow$ prune $\rightarrow$ exploit $\rightarrow$ propogate $\rightarrow$ prune. Some terminology is shown as below:
+\begin{outline}
+    \1 The temporary values at MAX-nodes are alpha($\alpha$) values
+    \1 The temporary values at MIN-nodes are beta($\beta$) values
+\end{outline}
+
+\noindent
+Minimax algorithm with DFS, it provides the \textbf{same result} as the complex minimax search to the same depth because only irrelevant nodes are eliminated.
+\begin{outline}
+    \1 ALPHA = the value of the best choice we have found so far at any choice point along the path for MAX
+        \2 ALPHA value can \textbf{never devrease}
+    \1 BETA = the value of the best choice we have found so far at any choice point along the par for MIN
+        \2 BETA value can \textbf{never increase}
+\end{outline}
+
+\noindent
+The Alpha-Beta (pruning) principle is shown as below:
+\begin{outline}
+    \1 If an \textbf{ALPHA-value is larger or equal than the BETA-value} of a descendant node: stop generation of the children of the descentdant
+    \1 If a \textbf{BETA-value is smaller or equal than the ALPHA-value} of a descendant node: stop generation of the children of the descendant
+\end{outline}
+
+\noindent
+The algorithm for ALPHA-BETA is shown as below:
+
+\tabto{0mm} \textbf{function} MINIMAX-SEARCH(game,state) \textbf{returns} an action
+\tabto{5mm} player $\leftarrow$ game.TO-MOVE(state)
+\tabto{5mm} value,move $\leftarrow$ MAX-VALUE(game,state,$- \infty$,$+ \infty$)
+\tabto{5mm} \textbf{return} move
+
+\tabto{0mm} \textbf{function} MAX-VALUE(game,state,$\alpha$,$\beta$) \textbf{returns} a (utility,move) pair
+\tabto{5mm} \textbf{if} game.IS-TERMINAL(state) \textbf{then return} game.UTILITY(state,player),null
+\tabto{5mm} v $\leftarrow$ $- \infty$
+\tabto{5mm} \textbf{for each $a$ in} game.ACTIONS(state) \textbf{do}
+\tabto{10mm} v2,a2 $\leftarrow$ MIN-VALUE(game,game.RESULT(state,a),$\alpha$,$\beta$)
+\tabto{10mm} \textbf{if} v2 $>$ v \textbf{then}
+\tabto{15mm} v,move $\leftarrow$ v2,a
+\tabto{15mm} $\alpha \leftarrow$ MAX($\alpha$,v) \textcolor{cyan}{\emph{\% prepare $\alpha$ for MIN}}
+\tabto{10mm} \textbf{if} v $> \beta$ \textbf{then reutrn} v,move \textbf{then return} result \textcolor{cyan}{\emph{\% ALPHA-BETA pruning, just return}}
+\tabto{5mm} \textbf{return} v,move
+
+\tabto{0mm} \textbf{function} MIN-VALUE(game,state,$\alpha$,$\beta$) \textbf{returns} a (utility,move) pair
+\tabto{5mm} \textbf{if} game.IS-TERMINAL(state) \textbf{then return} game.UTILITY(state,player),null
+\tabto{5mm} v $\leftarrow$ $+ \infty$
+\tabto{5mm} \textbf{for each $a$ in} game.ACTION(state) \textbf{do}
+\tabto{10mm} v2,a2 $\leftarrow$ MAX-VALUE(game,game.RESULT(state,a),$\alpha$,$\beta$)
+\tabto{10mm} \textbf{if} v2 $<$ v \textbf{then}
+\tabto{15mm} v,move $\leftarrow$ v2,a
+\tabto{15mm} $\beta \leftarrow$ MIN($\beta$,v) \textcolor{cyan}{\emph{\% prepare $\beta$ for MAX}}
+\tabto{10mm} \textbf{if} v $\le \alpha$ \textbf{then return} v,move \textcolor{cyan}{\emph{\% ALPHA-BETA pruning, just return}}
+\tabto{5mm} \textbf{return} v,move
+
+\noindent
+\\ The Gain: best case. If at every layer: the best node is the left-most one \textbf{(perfectly ordered tree)}. In the best case, the search expenditure is reduced to $O(b^{\frac{d}{2}})$
+
+\subsection{Expectiminimax}
+If there is posibility, stochastic instead of deterministic.
+\tabto{0mm} $d_{i}$: possible dice roll
+\tabto{0mm} $P(d_{i})$: probability of obtaining that roll
+\tabto{0mm} $EXPECTIMINIMAX(s) = $
+\tabto{5mm} $UTILITY(s)$ if $IsTerminal(s)$
+\tabto{5mm} $max_{a} EXPECTIMINIMAX(Result(s,a))$ if $ToMove(s) = MAX$
+\tabto{5mm} $min_{a} EXPECTIMINIMAX(Result(s,a))$ if $ToMove(s) = MIN$
+\tabto{5mm} $\sum_{d} P(d) \times EXPECTIMINIMAX(Result(s,d))$ if $ToMove(s) = CHANCE$
+\tabto{0mm} $Result(s,d)$: attainable positions from $C$ with $d$
+
+\subsection{Summary}
+\begin{enumerate}
+    \item A \textbf{game} can be defined by the initial state, the operator/actions, a terminal test, a utility function/ outcome of the game
+    \item In two-player board game, \textbf{minimax algorithm} can be used.
+    \item The \textbf{alpha-beta algorithm} produces the \textbf{same result} but it is more efficient because it just prunes away irrelevant branches.
+    \item \textbf{Utility/heuristics} of some states will be determined by an \textbf{evaluation function}.
+    \item Games of chance can be handled by some extension, EXPECTIMINIMAX.
+    \item The success for different games is based on quite different methodologies.
+\end{enumerate}
+
+\pagebreak

@@ -19,8 +19,43 @@
 \contentsline {subsection}{\numberline {4.6}Uniform Cost Search (UCS)}{10}{}%
 \contentsline {subsection}{\numberline {4.7}Summary}{11}{}%
 \contentsline {section}{\numberline {5}Informal search}{12}{}%
-\contentsline {section}{\numberline {6}CSP}{13}{}%
-\contentsline {section}{\numberline {7}Pattern mining}{13}{}%
-\contentsline {section}{\numberline {8}Game tree}{13}{}%
-\contentsline {section}{\numberline {9}Planing}{13}{}%
-\contentsline {section}{\numberline {10}MDP}{13}{}%
+\contentsline {subsection}{\numberline {5.1}Overview}{12}{}%
+\contentsline {subsection}{\numberline {5.2}Greedy search}{12}{}%
+\contentsline {subsection}{\numberline {5.3}Beam search}{13}{}%
+\contentsline {subsection}{\numberline {5.4}Combination of UCS and Greedy Search}{13}{}%
+\contentsline {subsection}{\numberline {5.5}UCS + Greedy Search}{14}{}%
+\contentsline {subsection}{\numberline {5.6}Redundant Paths}{15}{}%
+\contentsline {subsection}{\numberline {5.7}$A^{*}$ went wrong}{16}{}%
+\contentsline {subsubsection}{\numberline {5.7.1}Consistent heuristics}{16}{}%
+\contentsline {subsubsection}{\numberline {5.7.2}repair frontier}{17}{}%
+\contentsline {subsection}{\numberline {5.8}Iterative Deepening $A^{*}$}{17}{}%
+\contentsline {subsection}{\numberline {5.9}Summary}{18}{}%
+\contentsline {section}{\numberline {6}CSP}{19}{}%
+\contentsline {subsection}{\numberline {6.1}Overview}{19}{}%
+\contentsline {subsection}{\numberline {6.2}Variaties of CSP}{19}{}%
+\contentsline {subsection}{\numberline {6.3}Solution to CSP}{20}{}%
+\contentsline {subsection}{\numberline {6.4}Backtracking}{20}{}%
+\contentsline {subsection}{\numberline {6.5}Improvement on Backtracking}{20}{}%
+\contentsline {subsubsection}{\numberline {6.5.1}Filtering}{21}{}%
+\contentsline {subsubsection}{\numberline {6.5.2}Ordering}{22}{}%
+\contentsline {subsubsection}{\numberline {6.5.3}Structure}{22}{}%
+\contentsline {subsection}{\numberline {6.6}Constraint Optimization}{22}{}%
+\contentsline {subsection}{\numberline {6.7}Summary}{23}{}%
+\contentsline {section}{\numberline {7}Pattern mining}{24}{}%
+\contentsline {subsection}{\numberline {7.1}Overview}{24}{}%
+\contentsline {subsection}{\numberline {7.2}Frequent itemset mining}{24}{}%
+\contentsline {subsection}{\numberline {7.3}Search space}{24}{}%
+\contentsline {subsection}{\numberline {7.4}Enumeration Algorithms}{26}{}%
+\contentsline {subsection}{\numberline {7.5}Summary}{26}{}%
+\contentsline {section}{\numberline {8}Game tree}{27}{}%
+\contentsline {subsection}{\numberline {8.1}Games}{27}{}%
+\contentsline {subsection}{\numberline {8.2}Minimax}{27}{}%
+\contentsline {subsubsection}{\numberline {8.2.1}Terminology}{27}{}%
+\contentsline {subsubsection}{\numberline {8.2.2}Algorithm}{27}{}%
+\contentsline {subsubsection}{\numberline {8.2.3}Evaluation function}{28}{}%
+\contentsline {subsubsection}{\numberline {8.2.4}Stopping criteria}{28}{}%
+\contentsline {subsection}{\numberline {8.3}Alpha-Beta Search}{28}{}%
+\contentsline {subsection}{\numberline {8.4}Expectiminimax}{30}{}%
+\contentsline {subsection}{\numberline {8.5}Summary}{30}{}%
+\contentsline {section}{\numberline {9}Planing}{31}{}%
+\contentsline {section}{\numberline {10}MDP}{31}{}%
