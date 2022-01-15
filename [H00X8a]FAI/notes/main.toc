@@ -19,8 +19,13 @@
 \contentsline {subsection}{\numberline {4.6}Uniform Cost Search (UCS)}{10}{}%
 \contentsline {subsection}{\numberline {4.7}Summary}{11}{}%
 \contentsline {section}{\numberline {5}Informal search}{12}{}%
-\contentsline {section}{\numberline {6}CSP}{13}{}%
-\contentsline {section}{\numberline {7}Pattern mining}{13}{}%
-\contentsline {section}{\numberline {8}Game tree}{13}{}%
-\contentsline {section}{\numberline {9}Planing}{13}{}%
-\contentsline {section}{\numberline {10}MDP}{13}{}%
+\contentsline {subsection}{\numberline {5.1}Overview}{12}{}%
+\contentsline {subsection}{\numberline {5.2}Greedy search}{12}{}%
+\contentsline {subsection}{\numberline {5.3}Beam search}{13}{}%
+\contentsline {subsection}{\numberline {5.4}Combination of UCS and Greedy Search}{13}{}%
+\contentsline {subsection}{\numberline {5.5}Summary}{14}{}%
+\contentsline {section}{\numberline {6}CSP}{15}{}%
+\contentsline {section}{\numberline {7}Pattern mining}{15}{}%
+\contentsline {section}{\numberline {8}Game tree}{15}{}%
+\contentsline {section}{\numberline {9}Planing}{15}{}%
+\contentsline {section}{\numberline {10}MDP}{15}{}%
