@@ -30,7 +30,7 @@
 \contentsline {subsubsection}{\numberline {5.7.2}repair frontier}{17}{}%
 \contentsline {subsection}{\numberline {5.8}Iterative Deepening $A^{*}$}{17}{}%
 \contentsline {subsection}{\numberline {5.9}Summary}{18}{}%
-\contentsline {section}{\numberline {6}CSP}{19}{}%
+\contentsline {section}{\numberline {6}Constraint Sastification Problems}{19}{}%
 \contentsline {subsection}{\numberline {6.1}Overview}{19}{}%
 \contentsline {subsection}{\numberline {6.2}Variaties of CSP}{19}{}%
 \contentsline {subsection}{\numberline {6.3}Solution to CSP}{20}{}%
@@ -57,5 +57,20 @@
 \contentsline {subsection}{\numberline {8.3}Alpha-Beta Search}{28}{}%
 \contentsline {subsection}{\numberline {8.4}Expectiminimax}{30}{}%
 \contentsline {subsection}{\numberline {8.5}Summary}{30}{}%
-\contentsline {section}{\numberline {9}Planing}{31}{}%
-\contentsline {section}{\numberline {10}MDP}{31}{}%
+\contentsline {section}{\numberline {9}Planning}{31}{}%
+\contentsline {subsection}{\numberline {9.1}Overview}{31}{}%
+\contentsline {subsection}{\numberline {9.2}STRIPS planning}{31}{}%
+\contentsline {subsubsection}{\numberline {9.2.1}Overview}{31}{}%
+\contentsline {subsubsection}{\numberline {9.2.2}Example: Blocks world domain}{32}{}%
+\contentsline {subsection}{\numberline {9.3}Heuristics for STRIPS planning}{34}{}%
+\contentsline {subsection}{\numberline {9.4}Summary}{34}{}%
+\contentsline {section}{\numberline {10}Markov Decision Process}{36}{}%
+\contentsline {subsection}{\numberline {10.1}Overview}{36}{}%
+\contentsline {subsection}{\numberline {10.2}Solution for MDP}{37}{}%
+\contentsline {subsection}{\numberline {10.3}Value iteration}{38}{}%
+\contentsline {subsection}{\numberline {10.4}Policy iteration}{38}{}%
+\contentsline {subsubsection}{\numberline {10.4.1}Fixed policy}{38}{}%
+\contentsline {subsubsection}{\numberline {10.4.2}Policy extraction}{39}{}%
+\contentsline {subsubsection}{\numberline {10.4.3}Policy iteration}{39}{}%
+\contentsline {subsection}{\numberline {10.5}Value vs. Policy iteration}{39}{}%
+\contentsline {subsection}{\numberline {10.6}Summary}{40}{}%

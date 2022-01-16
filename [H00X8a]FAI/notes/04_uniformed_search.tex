@@ -1,0 +1,195 @@
+\subsection{Overview}
+Some terminologies for searching problem in graph:
+\begin{enumerate}
+    \item node expansion: generating all successor node considering the availble actions (the whole process)
+    \item explored nodes: nodes that have already been expanded
+    \item frontier/ fringe: set of all nodes available for expansion (candidate for expansion)
+    \item search stratege: defines which node is expanded next (the strategies)
+\end{enumerate}
+
+\noindent
+\subsection{Graph search}
+Graph search, frontier = {<s,a>, <s,b>}, its \textcolor{blue}{basic} algorithm: \\
+\textbf{Input:} \\
+\tabto{5mm} a graph, \\
+\tabto{5mm} a set of start nodes, \\
+\tabto{5mm} Boolean procedure \emph{goal(n)} that tests if \emph{n} is a goal node. \\
+\emph{frontier} := {$<s>$, $s$ is a start node} \\
+\textbf{while} \emph{frontier} is not empty: \\
+\tabto{5mm} \textbf{select} and \textbf{remove} path $<n_{0},...,n_{k}>$ from \emph{frontier} \textbf{for every} neighbor $n$ of $n_{k}$ \\
+\tabto{10mm} \textcolor{blue}{\textbf{if} \emph{goal(n)}} \\
+\tabto{15mm} \textcolor{blue}{\textbf{return} $<n_{0},...,n_{k},n>$} \\
+\tabto{10mm} \textbf{else add} $<n_{0},...,n_{k},n>$ to \emph{frontier} \\
+\textbf{end while} \\
+
+\noindent
+For loop detection, the \textcolor{red}{loop-detection} algorithm will be: \\
+\textbf{Input:} \\
+\tabto{5mm} a graph, \\
+\tabto{5mm} a set of start nodes, \\
+\tabto{5mm} Boolean procedure \emph{goal(n)} that tests if \emph{n} is a goal node. \\
+\emph{frontier} := {$<s>$, $s$ is a start node} \\
+\textbf{while} \emph{frontier} is not empty: \\
+\tabto{5mm} \textbf{select} and \textbf{remove} path $<n_{0},...,n_{k}>$ from \emph{frontier} \textbf{for every} neighbor $n$ of $n_{k}$ \\
+\tabto{10mm} \textcolor{blue}{\textbf{if} \emph{goal(n)}} \\
+\tabto{15mm} \textcolor{blue}{\textbf{return} $<n_{0},...,n_{k},n>$} \\
+\tabto{10mm} \textcolor{red}{\textbf{else if} $n \notin {n_{0},...,n_{k}}$} \\
+\tabto{15mm} \textbf{then add} $<n_{0},...,n_{k},n>$ to \emph{frontier} \\
+\textbf{end while} \\
+
+Two basic searching strategies for selecting nodes to explore: depth-first search and breadth-first search.
+
+\subsection{DFS and BFS}
+\subsubsection{Depth-First Search (DFS)}
+Its selecting strategy is \textbf{LIFO = "Last In First Out"}, we work with \textbf{stack}. 
+\begin{outline}
+    \1 Time complexity: $O(b^{m})$
+        \2 with b: branching factor, m: maximum depth
+    \1 Space complexity: $O(b \times m)$
+        \2 with b: branching factor, m: maximum depth
+\end{outline}
+
+\noindent
+The property of DFS:
+\begin{outline}
+    \1 Time complexity: $O(b^{m})$
+    \1 Space complexity: $O(b \times m)$
+    \1 Completeness: is complete if finite m and prevent loop
+    \1 Optimal: no guarantee, it finds the leftmost solution
+\end{outline}
+
+\subsubsection{Breadth-First Search (BFS)}
+Its selecting strategy is \textbf{FIFO = "First In First Out"}, we work with \textbf{queue}.
+\begin{outline}
+    \1 Time complexity: $O(b^{s})$
+        \2 with b: branching factor, s: shallowest-solution depth
+    \1 Space complexity: $O(b^{s})$
+        \2 with b: branching factor, s: shallowest-solution depth
+    \1 Completeness: no matter loop or not, it is complete
+    \1 Optimal: optimal only if \textbf{cost between each node = 1}
+\end{outline}
+
+\subsubsection{Comparison of DFS \& BFS}
+DFS uses less memory, but needs loop detection; while BFS use more memory, but does not need loop detection. More details are shown as below: \\
+\begin{outline}
+    \1 Depth-First Search
+        \2 Space is restricted
+        \2 Many solutions exist, solutions are long
+        \2 no infinite paths
+    \1 Breadth-First Search
+        \2 Space is not a problem
+        \2 Solution containing fewest/shallowest depth
+\end{outline}
+
+\subsection{Iterative Deepening}
+Iterative Deepening is a combinatino of DFS and BFS, the idea is to get advantages from both DFS (space complexity) and BFS (time complexity, optimal, completeness). Run a DFS with depth limit 0/1/2/3/.... (P.S.:LIFO-stack, FIFO-queue). \\
+Furthermore, the \textbf{outter} algorithm: \\
+\textbf{procedure iterative-deepening (} \\
+\tabto{5mm} \textbf{Input:}  \\
+\tabto{5mm} a graph, \\
+\tabto{5mm} a set of start nodes, \\
+\tabto{5mm} Boolean function \emph{goal(n)} that tests if \emph{n} is a goal mode \\
+\textbf{)} \\
+\emph{depthlimit = 1} \\
+\textbf{while} goal not found \textbf{do} \\
+\tabto{5mm} call depth-limited-search(graph, starting nodes, \emph{goal(n)}, \emph{depthlimit})
+\tabto{5mm} \emph{depthlimit = depthlimit + 1} \\
+
+\noindent
+The \textbf{inner} algorithm: \\
+\textbf{procedure depth-limited-search(} \\
+\tabto{5mm} \textbf{Input:}  \\
+\tabto{5mm} a graph, \\
+\tabto{5mm} a set of start nodes, \\
+\tabto{5mm} Boolean procedure \emph{goal(n)} that tests if \emph{n} is a goal node, \\
+\tabto{5mm} \textcolor{red}{\emph{depthlimit}: natural number} \\
+\textbf{)} \\
+\emph{frontier} := {$<s>$ : $s$ is a start node} \\
+\textbf{while} \emph{frontier} is not empty: \\
+\tabto{5mm} \textbf{select} and \textbf{remove} \textcolor{red}{first} path $<n_{0},...,n_{k}>$ from \emph{frontier} \\
+\tabto{5mm} \textcolor{red}{\textbf{if} \emph{k < depthlimit}} \\
+\tabto{10mm} \textbf{for every} neighbor $n$ for $n_{k}$ \\
+\tabto{15mm} \textcolor{blue}{\textbf{if} \emph{goal(n)}} \\
+\tabto{20mm} \textcolor{blue}{\textbf{then return $n_{0},...,n_{k},n$}} \\
+\tabto{15mm} \textbf{else add} $n_{0},...,n_{k},n$ to \textcolor{red}{start of} \emph{frontier} \\
+\textbf{end while} \\
+
+\noindent
+The property of iterative deepening (ID) is similar to BFS, the only difference is the memory usage which is better than BFS ($O(b \times s) \ge O(b^{s})$). \emph{Time complexity almost is the same as BFS, the only difference is ID needs iterative reconstruction each limit of 0,1,2,3 needs to start from start node (root) and to rebuild the search tree}
+\begin{outline}
+    \1 Time complexity: $O(b^{s})$
+        \2 with b: branching factor, s: shallowest-solution depth
+    \1 Space complexity: $O(b \times s)$
+        \2 with b: branching factor, s: shallowest-solution depth
+    \1 Completeness: no matter loop or not, it is complete
+    \1 Optimal: optimal only if \textbf{cost between each node = 1}
+\end{outline}
+
+\subsection{Bi-directional search}
+Forward and backward search together. But it is not always possible \emph{because backward is not always known}. The algorithm is shown below: \\
+\textbf{Input:} \\
+\tabto{5mm} a graph, \\
+\tabto{5mm} a set of start nodes, \\
+\tabto{5mm} Boolean procedure \emph{goal(n)} that tests if \emph{n} is a goal node. \\
+$frontier_{0}$ := {$<s>$: $s$ is a start node} \\
+$frontier_{1}$ := {$<g>$: $g$ is a goal node} \\
+$i$ := 0; \\
+\textbf{while} $frontier_{1}$ and $frontier_{0}$ not empty: \\
+\tabto{5mm} $i$ := $i+1$ mode $2$; $j$ := $i+1$ mod $2$; (swap $i$ and $j$) \\
+\tabto{5mm} \textbf{select} and \textbf{remove} first path $<n_{0},...,n_{k}>$ from $frontier_{i}$ \\
+\tabto{5mm} \textbf{for every} neighbor $n$ of $n_{k}$ in direction $i$ \\
+\tabto{10mm} \textbf{if} $n$ occurs in path $<n^{\prime}_{0},...,n^{\prime}_{l}>$ of $frontier_{j}$ with l the length of n in $frontier_{j}$ \\
+\tabto{15mm} \textbf{return} solution based on $<n^{\prime}_{0},...,n^{\prime}_{l}>$ and $<n_{0},...,n_{k}>$ \\
+\tabto{10mm} \textbf{else add} $<n_{0},...,n_{k},n>$ to end of $frontier_{i}$ \\
+\textbf{end while} \\
+
+\noindent
+The property of Bi-directional search:
+\begin{outline}
+    \1 Time complexity: $O($\textcolor{red}{$2 \times$}$b^{\frac{d}{2}})$
+        \2 with b: branching factor, d:maximum depth
+    \1 Space complexity: $O($\textcolor{red}{$2 \times$}$b^{\frac{d}{2}})$
+        \2 with b: branching factor, d:maximum depth
+    \1 Completeness: yes
+    \1 Optimal: \textcolor{red}{yes} <- \textbf{why?}
+\end{outline}
+
+\subsection{Uniform Cost Search (UCS)}
+BFS finds the shortest path in terms of number of actions. However, it does not find the least-cost path. We will now consider the cost between 2 nodes. \\
+\textbf{The formula: $cost(<n_{0},n_{1},...,n_{k}>) = \sum_{i=1}^{k} cost(<n_{i-1},n_{i}>)$} \\
+\textbf{SELECT} becomes \textbf{"priority queue, select element with lowest cost first"} \\
+Two possibilities in graph searching: first version and last version.
+\begin{enumerate}
+    \item First version: after selecting first lowest-cost node, done.
+    \item Last version: after checking every lowest-cost node, then done (more optimal).
+\end{enumerate}
+
+\noindent
+Then we can have a further optimization: \textbf{Branch-and-bound principle:} when a goal is found along a path with cost C, prune all paths on the frontier with cost > C, where these cost can never be optimal since their cost has already > C. \\
+The properties of UCS are: \\
+The property of Bi-directional search:
+\begin{outline}
+    \1 Time complexity: $O(b^{1+\frac{C^{*}}{\epsilon}})$
+        \2 with b: branching factor, $C^{*}$: solution cost, arc cost (cost between 2 neighbor nodes) at least $\epsilon$
+    \1 Space complexity: $O(b^{1+\frac{C^{*}}{\epsilon}})$
+        \2 with b: branching factor, $C^{*}$: solution cost, arc cost (cost between 2 neighbor nodes) at least $\epsilon$
+    \1 Completeness: yes (minimum arc cost is positive, $\epsilon > 0$)
+    \1 Optimal: yes
+\end{outline}
+
+Remember: UCS explains increasing \textbf{cost contours}.
+\begin{outline}
+    \1 Pros:
+        \2 Complete and Optimal!
+    \1 Cons:
+        \2 Explores option in every "direction", just like BFS
+        \2 No information about goal location, only accumulation of cost (advanced algorithm should have advanced function/info providing)
+\end{outline}
+
+\subsection{Summary}
+\begin{enumerate}
+    \item The difference between each algorithm: \textbf{which node on the frontier will be explored next}.
+    \item Search algorithm is judged by its properties: \textbf{time complexity, space complexity, completeness, optimality}.
+\end{enumerate}
+
+\pagebreak

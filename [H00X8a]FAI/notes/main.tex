@@ -32,6 +32,10 @@
 % tickz 画图
 \usepackage{tikz}
 \usetikzlibrary{graphs}
+% for sub figure
+\usepackage{subcaption}
+% how to write max over x: \max\limits_x
+
 %----------------------------- THE ARTICLE -------------------------------
 
 \begin{document}
@@ -45,25 +49,25 @@
 \setcounter{page}{1}
 
 \section{Intro to AI}
-\input{intro_AI}
+\input{01_intro_AI}
 \section{Rational agent}
-\input{rational_agent}
+\input{02_rational_agent}
 \section{State space}
-\input{state_space}
+\input{03_state_space}
 \section{Uniformed search}
-\input{uniformed_search}
+\input{04_uniformed_search}
 \section{Informal search}
-\input{informal_search}
-\section{CSP}
-\input{constraint_statisfication_problems}
+\input{05_informed_search}
+\section{Constraint Sastification Problems}
+\input{06_constraint_satisfication_problems}
 \section{Pattern mining}
-\input{pattern_mining}
+\input{07_pattern_mining}
 \section{Game tree}
-\input{game_tree}
-\section{Planing}
-
-\section{MDP}
-
+\input{08_game_tree}
+\section{Planning}
+\input{09_planning}
+\section{Markov Decision Process}
+\input{10_markov_decision_process}
 \clearpage
 
 

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.12.22)  15 JAN 2022 23:23
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.12.22)  16 JAN 2022 15:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -498,60 +498,82 @@ File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 File: tikzlibrarygraphs.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \tikz@lib@auto@number=\count297
 \tikz@qnode@count=\count298
+) (/usr/local/texlive/2021/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2020/10/07 v1.3j Sub-captions (AR)
+ (/usr/local/texlive/2021/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+ (/usr/local/texlive/2021/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
+\captionmargin=\dimen281
+\captionmargin@=\dimen282
+\captionwidth=\dimen283
+\caption@tempdima=\dimen284
+\caption@indent=\dimen285
+\caption@parindent=\dimen286
+\caption@hangindent=\dimen287
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count299
+\c@continuedfloat=\count300
+)
+\c@subfigure=\count301
+\c@subtable=\count302
 ) (/usr/local/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
 File: l3backend-xetex.def 2021-12-14 L3 backend support: XeTeX
  (|extractbb --version)
-\c__kernel_sys_dvipdfmx_version_int=\count299
-\l__color_backend_stack_int=\count300
-\g__color_backend_stack_int=\count301
-\g__graphics_track_int=\count302
+\c__kernel_sys_dvipdfmx_version_int=\count303
+\l__color_backend_stack_int=\count304
+\g__color_backend_stack_int=\count305
+\g__graphics_track_int=\count306
 \l__pdf_internal_box=\box65
-\g__pdf_backend_object_int=\count303
-\g__pdf_backend_annotation_int=\count304
-\g__pdf_backend_link_int=\count305
+\g__pdf_backend_object_int=\count307
+\g__pdf_backend_annotation_int=\count308
+\g__pdf_backend_link_int=\count309
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 37.
-LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line 37.
+LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 41.
+LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line 41.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/omlntxmi.fd
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 37.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 41.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 37.
-LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 37.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 41.
+LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 41.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 37.
-LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 37.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 41.
+LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 41.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 37.
-LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 37.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 41.
+LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 41.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    ... okay on input line 41.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
  (../others/title_page.tex
 File: ../others/sedes.pdf Graphic file (type pdf)
 <use ../others/sedes.pdf>
@@ -615,9 +637,9 @@ File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- [2] (./intro_AI.tex) [1
+ [2] (./01_intro_AI.tex) [1
 
-] (./rational_agent.tex
+] (./02_rational_agent.tex
 Overfull \hbox (9.22295pt too wide) in paragraph at lines 53--53
 []|\TU/lmr/bx/n/8 Deterministic| 
  []
@@ -667,7 +689,7 @@ Overfull \hbox (81.79134pt too wide) in paragraph at lines 53--55
  [][] 
  []
 
-[2]) [3] (./state_space.tex [4]) [5] (./uniformed_search.tex
+[2]) [3] (./03_state_space.tex [4]) [5] (./04_uniformed_search.tex
 Underfull \hbox (badness 10000) in paragraph at lines 22--24
 
  []
@@ -697,7 +719,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 143--145
 
  []
 
-[9]) [10] [11] (./informal_search.tex
+[9]) [10] [11] (./05_informed_search.tex
 Underfull \hbox (badness 10000) in paragraph at lines 10--12
 
  []
@@ -742,7 +764,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 263--265
 
  []
 
-[17]) [18] (./constraint_statisfication_problems.tex
+[17]) [18] (./06_constraint_satisfication_problems.tex
 Underfull \hbox (badness 10000) in paragraph at lines 16--19
 
  []
@@ -767,7 +789,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 128--130
 
  []
 
-[22]) [23] (./pattern_mining.tex
+[22]) [23] (./07_pattern_mining.tex
 Underfull \hbox (badness 10000) in paragraph at lines 2--3
 
  []
@@ -782,7 +804,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 81--83
 
  []
 
-[25]) [26] (./game_tree.tex
+[25]) [26] (./08_game_tree.tex
 Overfull \hbox (8.70972pt too wide) in paragraph at lines 40--41
 [] \TU/lmr/bx/n/10 if \TU/lmr/m/n/10 game.IS-TERMINAL(state) \TU/lmr/bx/n/10 then return \TU/lmr/m/n/10 game.UTILITY(state,player),null
  []
@@ -802,19 +824,19 @@ Overfull \hbox (8.70972pt too wide) in paragraph at lines 114--115
 [] \TU/lmr/bx/n/10 if \TU/lmr/m/n/10 game.IS-TERMINAL(state) \TU/lmr/bx/n/10 then return \TU/lmr/m/n/10 game.UTILITY(state,player),null
  []
 
-[29]) [30] [31] (./main.aux)
+[29]) [30] (./09_planning.tex [31] [32] [33] [34]) [35] (./10_markov_decision_process.tex [36] [37] [38] [39]) [40] (./main.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 17161 strings out of 476257
- 331690 string characters out of 5811149
- 610122 words of memory out of 5000000
- 37443 multiletter control sequences out of 15000+600000
- 463614 words of font info for 145 fonts, out of 8000000 for 9000
+ 18593 strings out of 476257
+ 359878 string characters out of 5811149
+ 629811 words of memory out of 5000000
+ 38858 multiletter control sequences out of 15000+600000
+ 470284 words of font info for 156 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 84i,11n,89p,551b,654s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 84i,11n,131p,563b,845s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (34 pages).
+Output written on main.pdf (43 pages).
