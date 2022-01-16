@@ -1,0 +1,188 @@
+\subsection{Overview}
+This section is about non-deterministic search, which is called stochastic search. First we can take Grid World as an example, which is shown below:
+
+\begin{outline}
+    \1 A maze-like problem
+        \2 Agent move in the grid
+        \2 Walls block the agent's path
+    \1 Noisy movement - stochastic movement
+        \2 $80\% \rightarrow$ correct direction, $20\% \rightarrow$ other (incorrect) directions.
+    \1 The agent recives rewards each time step
+        \2 Small living rewards (can be negative)
+        \2 Big rewards at the end (negative or positive)
+    \1 Goal: maximize sum of rewards
+\end{outline}
+
+\noindent
+An MDP is defined as below. The MDP, the "markov" means actions outcomes depend only the current state, and the current, future and past are independent. It is similar to search, where the successor function could only depend on the current state (not the history). 
+\begin{outline}
+    \1 a set of states $s \in S$
+    \1 a set of actions $ a \in A$
+    \1 a transition function $T(s,a,s^{\prime})$
+    \1 a reward function $R(s,a,s^{\prime})$
+    \1 an initial state
+    \1 some goal states (probably not)
+\end{outline}
+
+\noindent
+Different between deterministic and stochastic search problem. In deterministic search, we want \textbf{an optimal path}, while in stochastic search, we want \textbf{an optimal policy $\pi: S \rightarrow A$,} where makes the agent becomes relfex agent. Each MDP state projects an expectimax-like search tree, similar to minimax but only with max layer and an addition chance state layer. 
+
+\noindent
+Some preference exists in MDP: \textbf{maximize} the sum of rewards $\rightarrow$ only max layer, prefer rewards \textbf{now} instead of later $\rightarrow$ discount factor $\gamma$ $\rightarrow$ indicating that values of rewards decay exponentially.
+
+\noindent
+Stopping criteria for MDP:
+\begin{enumerate}
+    \item Finite horizon (similar to depth-limited search), terminate episodes after a fixed T steps (e.g., life)
+    \item Discounting: use $0 < \gamma < 1$: finally it will converge
+    \item Absorbing state \textcolor{red}{$\leftarrow$ Question: do not understand!}
+\end{enumerate}
+
+\subsection{Solution for MDP}
+\begin{outline}
+    \1 Basic features
+        \2 Set of states $S$
+        \2 Initial state $s_{0}$
+        \2 Set of actions $A$
+        \2 Transition $P(s^{\prime}|s,a)$ (or $T(s,a,s^{\prime})$) \textcolor{red}{$\leftarrow$ probability}
+        \2 Rewards $R(s,a,s^{\prime})$ (and discount $\gamma$)
+    \1 MDP quantities so far
+        \2 Policy = Choice of action for each state (Policy layer)
+        \2 Utility = sum of (discount) rewards (Value layer)
+\end{outline}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \node [draw,circle](s)at(3,5){};
+        \node [draw,circle](sa)at(2,3){};
+        \node [draw,circle](sas)at(3,1){};
+
+        \draw[->] (s) -- (sa); 
+        \draw[dashed,->] (s) -- (0,3);
+        \draw[dashed,->] (s) -- (5,3);
+        \draw[->] (sa) -- (sas);  
+        \draw[dashed,->] (sa) -- (1,2);
+        \draw[dashed,->] (sa) -- (4,2);
+        \draw[->] (sas) -- (2,0);
+        \draw[dashed,->] (sas) -- (0,0);
+        \draw[dashed,->] (sas) -- (4,0);
+
+        \draw (13/4,5) node[right]{$s$};
+        \draw (5/2,4) node[right]{$a$};
+        \draw (9/4,3) node[right]{$s,a$};
+        \draw (5/2,2) node[left]{$s,a,s^{\prime}$};
+        \draw (13/4,1) node[right]{$s^{\prime}$};
+    \end{tikzpicture}
+    \caption{Search tree of MDP}
+    \label{fig:MDP_s_q_t_search_tree}
+\end{figure}
+
+\noindent
+\begin{outline}
+    \1 The value (utility) of $a$ state $s$:
+        \2 $V^{\prime}(s)$ = expected utility starting in $s$ and acting optimally
+    \1 The value (utility) of a q-state $(s,a)$:
+        \2 $Q^{\prime}(s,a)$ = expected utility starting out having taken action $a$ from state $s$ and acting optimally (transition q-state).
+    \1 The optimal policy:
+        \2 $\pi^{\prime}(s)$ = optimal action from every state $s$
+\end{outline}
+
+\noindent
+Recursive definition of value, \textbf{Bellman equations}:
+\begin{outline}
+    \1 $V^{*}(s) = \max\limits_a Q^{*}(s,a)$
+    \1 $Q^{*}(s,a) = \sum_{s^{\prime}} T(s,a,s^{\prime}[R(s,a,s^{\prime}) + \gamma V^{*}(s^{\prime})])$
+    \1 $V^{*}(s) = \max\limits_a \sum_{s^{\prime}} T(s,a,s^{\prime}) [R(s,a,s^{\prime}) + \gamma V^{*}(s^{\prime})]$
+\end{outline}
+
+\noindent 
+The problem is still there, when to stop? Key idea: \textbf{time-limited values} by defining "life". Define $V_{k}(s)$ to be the optimal value of $s$ if the game ends in $k$ more time steps. Thus, there will be \textbf{value iteration} and \textbf{policy iteration}.
+
+\subsection{Value iteration}
+The complexity of each value iteration is $O(S^{2} \times A)$
+\begin{enumerate}
+    \item Start with $V_{0}(s) = 0$: no time steps left means an expected reward sum of zero.
+    \item Given vector of $V_{k}(s)$ values, do one ply of expectimax from each state: $V_{k+1}(s) \leftarrow \max\limits_a \sum_{s^{\prime}} T(s,a,s^{\prime}) [R(s,a,s^{\prime}) + \gamma V_{k}(s^{\prime})]$
+    \item Repeat until convergence
+\end{enumerate}
+
+\noindent
+Some problems with value iteration:
+\begin{enumerate}
+    \item It is slow - with complexity $O(S^{2} \times A)$ per iteration
+    \item The "max" at each state rarely changes
+    \item The policy (a set of actions) often \textbf{converges long} before the values
+\end{enumerate}
+
+\subsection{Policy iteration}
+\subsubsection{Fixed policy}
+If we try a fixed policy $\pi(s)$, then the tree will be simpler - only one action per state, compared to that the expectimax tree max over all actions to compute the optimal values. Define the utility (V function) of a state $s$, under a fixed policy $\pi$, the value function will be: $V^{\pi}(s) = \sum_{s^{\prime}} T(s,\pi(s),s^{\prime}) [R(s,\pi(s),s^{\prime}) + \gamma V^{\pi}(s^{\prime})]$.
+
+\noindent
+How do we calcualte the V's for a fixed policy $pi$? 
+\begin{outline}
+    \1 $V_{0}^{\pi} (s) = 0$
+    \1 $V_{k+1}^{\pi} (s) \leftarrow \sum_{s^{\prime}} T(s,\pi(s),s^{\prime}) [R(s,\pi(s),s^{\prime}) + \gamma V_{k}^{\pi} (s^{\prime})]$, with $O(S^{2})$
+\end{outline}
+
+\subsubsection{Policy extraction}
+After obtaining values or q-values from the current map, we can extract the policy from a value-map or q-value-map, thus we have two basic algorithm for extracting policy (a set of actions): computing actions from values or computing actions from Q-values. It is obvious that \textbf{actions are easier to select from q-values than values}, because $V(s) = arg\max\limits_a Q(a,s)$.
+\begin{outline}
+    \1 Computing actions from values:
+        \2 $\pi^{*}(s) = arg\max\limits_a \sum_{s^{\prime}} T(s,a,s^{\prime}) [R(s,a,s^{\prime}) + \gamma V^{*}(s^{\prime})]$
+    \1 Computing actions from Q-values:
+        \2 $\pi^{*}(s) = arg\max\limits_a Q^{*}(s,a)$
+\end{outline}
+
+\subsubsection{Policy iteration}
+Alternative approach for optimal values: (policy fixed instead of expectimax search). Optimal and can converge faster under some conditions compared to expectimax search.
+\begin{enumerate}
+    \item Step 1: Policy evaluation: calculate utilities for some \textbf{fixed policy} (not optimal utilities!) until \textbf{convergence}
+    \item Step 2: Policy improvment: update policy using one-step look-ahead with resulting converged (not optimal but will be finally) utilities as \textbf{future values}
+    \item Repeat steps until policy converges
+\end{enumerate}
+
+\noindent
+For more details in policy iteration: evaluation is for finding values by fixed policy $\pi_{i}: V^{\pi_{i}}(s) \rightarrow V^{\pi_{i}}(s^{\prime})$, and improvment is for extracting policy by fixed values $V^{\pi_{i}}(s): \pi_{i} \rightarrow \pi_{i+1}$. And repeat these two processes until convergence of policy (policy (all actions) is not changed anymore.)
+\begin{outline}
+    \1 \textbf{Evaluation}: for fixed current policy $\pi$, find values with policy evaluation:
+        \2  $V_{k+1}^{\pi_{i}}(s) \rightarrow \sum_{s^{\prime}} T(s,\pi_{i}(s),s^{\prime}) [R(s,\pi_{i}(s),s^{\prime}) + \gamma V_{k}^{\pi_{i}}(s^{\prime})]$
+    \1 \textbf{Improvement}: for fixed values, get a better policy using policy extraction
+        \2 $\pi_{i+1}(s) = arg\max\limits_a \sum_{s^{\prime}} T(s,a,s^{\prime}) [R(s,a,s^{\prime}) + \gamma V^{\pi_{i}}(s^{\prime})]$
+\end{outline}
+
+\subsection{Value vs. Policy iteration}
+Both value iteration and policy iteration compute the same thing (all optimal values), but with different efficiency under various situation. Both are dynamic programs for solving MDPs.
+\begin{enumerate}
+    \item In value iteration
+    \begin{enumerate}
+        \item Every iteration updates both the values and \textbf{(implicitly)} the policy \textcolor{red}{$\leftarrow$ only value function explicitly}
+        \item We do not track the policy, but taking the max over actions implicity recomputes it, just not show a policy map, only show a value map. 
+    \end{enumerate}
+    \item In policy iteration
+    \begin{enumerate}
+        \item In each turn, we intersectly \textcolor{blue}{\textbf{update the utility with fixed policy}}, and \textcolor{blue}{\textbf{extract the policy with fixed updated utility}} (each turn is fast since we only consider one action not all of them instead of expectimax search/ value interation) \textcolor{red}{$\leftarrow$ both value and policy function explicitly}
+        \item After the policy is evaluated, the new policy is chosen
+        \item Using new policy to continue till the stopping criteria (life-limit or threshold)
+        \item Here we not only check the V-value/Q-value but also check the policy, show both V-value/Q-value map and policy map.
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{Summary}
+\begin{enumerate}
+    \item Different methods are introduced
+    \begin{enumerate}
+        \item Compute optimal values (whole): \textbf{value iteration} or \textbf{policy iteration}
+        \item Compute values from a particular policy: use \textbf{policy evaluation}
+        \item Extract policy from a set of values: use \textbf{policy extraction} \textcolor{red}{(one-step lookahead?)}
+    \end{enumerate}
+    \item However, both value iteration and policy iteration are similar
+    \begin{enumerate}
+        \item They are basically are variations of \textbf{Bellman updates}
+        \item They \textbf{all} use \textbf{one-step lookahead expectimax fragments} (no matter value iteration, but also policy iteration)
+        \item Difference in \textbf{max over actions (value iteration)} or \textbf{fixed policy (policy iteration)}, just different efficiency under different situation, sometime value iteration better, sometime policy iteration better, \textcolor{purple}{it depends on your own domain knowledge!}
+    \end{enumerate}
+\end{enumerate}
+
+\pagebreak
