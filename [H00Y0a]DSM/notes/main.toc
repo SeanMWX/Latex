@@ -1,0 +1,17 @@
+\contentsline {section}{\numberline {1}Descriptive Statistics}{1}{}%
+\contentsline {section}{\numberline {2}Visualizing data}{1}{}%
+\contentsline {section}{\numberline {3}Important Distributions}{1}{}%
+\contentsline {section}{\numberline {4}Confidence Intervals}{1}{}%
+\contentsline {subsection}{\numberline {4.1}Courses}{1}{}%
+\contentsline {subsubsection}{\numberline {4.1.1}Calculation both lcl and ucl}{1}{}%
+\contentsline {subsection}{\numberline {4.2}Exersice}{2}{}%
+\contentsline {section}{\numberline {5}Hypothesis Testing}{2}{}%
+\contentsline {section}{\numberline {6}Correlation}{2}{}%
+\contentsline {section}{\numberline {7}Linear Regression}{2}{}%
+\contentsline {section}{\numberline {8}Selection of Variables}{2}{}%
+\contentsline {section}{\numberline {9}Analysis of Variance (ANOVA)}{2}{}%
+\contentsline {section}{\numberline {10}Logistic Rgression}{2}{}%
+\contentsline {section}{\numberline {11}Introduction to Poisson Regression}{2}{}%
+\contentsline {section}{\numberline {12}Generalized Linear Model}{2}{}%
+\contentsline {section}{\numberline {13}DSM: Principal Component Analysis}{2}{}%
+\contentsline {section}{\numberline {14}DSM: Clustering Analysis}{2}{}%

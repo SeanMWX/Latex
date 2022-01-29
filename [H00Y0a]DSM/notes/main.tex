@@ -1,0 +1,119 @@
+\documentclass{article}
+
+% include graph
+\usepackage{graphicx}
+% if then else
+\usepackage{ifthen}
+% for sub itermize
+\usepackage{outlines}
+% using color package
+\usepackage[usenames,dvipsnames]{color}
+% 用于产生一种数学用的花体字  
+\usepackage{mathrsfs}
+% 数学符号  
+\usepackage{amsmath,amssymb}
+% 专门处理数学粗体的bm宏包
+\usepackage{bm}
+% 高质量数学字体/黑体  
+\usepackage[cmintegrals]{newtxmath}
+% Expectation by \E
+% just use "\mathbb{E}"
+% \DeclareMathOperator{\E}{\mathbb{E}}
+% 英文花体, e.g., $\mathcal{D}$
+% use table
+\usepackage{tabularx}
+\usepackage{booktabs}
+% use tab
+\usepackage{tabto}
+% 可以换行的 \underline{}
+% \usepackage{ulem} bug: 与emph冲突
+% 文字的删除线 \st
+\usepackage{soul}
+% tickz 画图
+\usepackage{tikz}
+\usetikzlibrary{graphs}
+% for sub figure
+\usepackage{subcaption}
+% how to write max over x: \max\limits_x
+% for programming language code
+\usepackage{listings}
+% for more color
+\usepackage{color}
+
+% Definition of listings for Java
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+% Definition of listings for R
+\lstset{language=R,
+    basicstyle=\small\ttfamily,
+    stringstyle=\color{dkgreen},
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+}
+
+%----------------------------- THE ARTICLE -------------------------------
+
+\begin{document}
+
+\input{../others/title_page}
+
+\pagenumbering{roman} 
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{Descriptive Statistics}
+\input{01_descriptive_statistics}
+\section{Visualizing data}
+\input{02_visualizing_data}
+\section{Important Distributions}
+\input{03_important_distributions}
+\section{Confidence Intervals}
+\input{04_confidence_intervals}
+\section{Hypothesis Testing}
+\input{05_hypothesis_testing}
+\section{Correlation}
+\input{06_correlation}
+\section{Linear Regression}
+\input{07_linear_regression}
+\section{Selection of Variables}
+\input{08_selection_of_variables}
+\section{Analysis of Variance (ANOVA)}
+\input{09_analysis_of_variance}
+\section{Logistic Rgression}
+\input{10_logistic_regression}
+\section{Introduction to Poisson Regression}
+\input{11_introduction_to_poisson_regression}
+\section{Generalized Linear Model}
+\input{12_generalized_linear_model}
+\section{DSM: Principal Component Analysis}
+\input{D01_principal_component_analysis}
+\section{DSM: Clustering Analysis}
+\input{D02_clustering_analysis}
+
+\clearpage
+
+
+\end{document}
