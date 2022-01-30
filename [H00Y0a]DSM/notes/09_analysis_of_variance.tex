@@ -1,0 +1,27 @@
+\subsection{Courses}
+\lstset{language=R}
+
+\subsubsection{\"lm\" different from \"aov\"}
+There is a transformation between lm and aov
+\begin{lstlisting}
+    # Using aov, (need to change df to as.factor)
+    diet.aov1 <- aov(LOSS ~ JOGGING + DIET + JOGGING*DIET data=diet_df,contrasts=list(JOGGING='contr.sum',DIET='contr.sum'))
+    summary(diet.aov1)
+
+    # Using lm, (do not need to as.factor)
+    diet.lm <- lm(LOSS ~ JOGGING + DIET + JOGGING * DIET, data=diet_df,contrasts=list(JOGGING="contr.sum",DIET="contr.sum"))
+
+    # Using ANOVA table, since ANOVA can be seen as a linear model, we can also use the lm function in R.
+    Anova(diet.lm,type='III')
+    
+\end{lstlisting}
+
+\subsubsection{unhomogeneous variance}
+\begin{lstlisting}
+    # Robust analysis, using hc3
+    Anova(diet.aov2,type="III",white.adjust='hc3')
+\end{lstlisting}
+
+
+\subsection{Exersice}
+
